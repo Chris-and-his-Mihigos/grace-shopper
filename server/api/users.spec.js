@@ -2,27 +2,54 @@
 
 const { expect } = require('chai');
 const request = require('supertest');
-const db = require('../db');
+const db = require('../db/db');
 const app = require('../index');
 
-const User = db.model('user');
+const User = require('../db/models/user');
 
 describe('User routes', () => {
-  beforeEach(() => db.sync({ force: true }))
 
   describe('/api/users/', () => {
-    const codysEmail = 'cody@puppybook.com'
+    const exampleUser = { email: 'ben@ben.ben' };
 
-    beforeEach(() => User.create({
-      email: codysEmail,
-    }))
+    beforeEach(() =>
+      db.sync({ force: true })
+        .then(() => User.create(exampleUser)));
 
-    it('GET /api/users', () => request(app)
-      .get('/api/users')
-      .expect(200)
-      .then((res) => {
-        expect(res.body).to.be.an('array')
-        expect(res.body[0].email).to.be.equal(codysEmail)
-      }))
-  }) // end describe('/api/users')
-}) // end describe('User routes')
+    describe('GET /users', () => {
+      it('should fetch all users', () => request(app)
+        .get('/api/users')
+        .expect(200)
+        .then((res) => {
+          expect(res.body).to.be.an('array')
+          expect(res.body[0].email).to.be.equal('ben@ben.ben');
+        }))
+    })
+
+    describe('POST /users/:userId', () => {
+      it('should create a new user', () => request(app)
+        .post('/api/users')
+        .send({ email: 'zeke@zeke.zeke' })
+        .expect(201)
+        .then((res) => {
+          expect(res.body.email).to.equal('zeke@zeke.zeke');
+        }))
+    })
+
+    describe('PUT /users/:userId', () => {
+      it('should update an existing user', () => request(app)
+        .put('/api/users/1')
+        .send({ email: 'zeke@zeke.zeke' })
+        .expect(201)
+        .then((res) => {
+          expect(res.body.email).to.equal('zeke@zeke.zeke');
+        }))
+    })
+
+    describe('DELETE /users/:userId', () => {
+      it('should delete a user', () => request(app)
+        .delete('/api/users/1')
+        .expect(204))
+    })
+  })
+})
