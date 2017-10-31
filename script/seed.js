@@ -17,9 +17,7 @@ const fakeTags = ['chill', 'upbeat', 'deep', 'funky'];
 
 // RANDOM INTEGER GENERATOR (INCLUSIVE)
 function randomInt(min, max) {
-  min = Math.ceil(min);
-  max = Math.floor(max);
-  return Math.floor(Math.random() * (max - min + 1)) + min;
+  return Math.floor(Math.random() * ((Math.floor(max) - Math.ceil(min)) + 1)) + min;
 }
 
 // FAKE MODEL GENERATORS
