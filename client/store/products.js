@@ -8,10 +8,10 @@ const REMOVE_PRODUCT = 'REMOVE_PRODUCT';
 const UPDATE_PRODUCT = 'UPDATE_PRODUCT';
 /* ------------   ACTION CREATORS     ------------------ */
 
-const fetch = products => ({ type: FETCH_PRODUCTS, products });
-const create = product => ({ type: CREATE_PRODUCT, product });
-const remove = id => ({ type: REMOVE_PRODUCT, id });
-const update = product => ({ type: UPDATE_PRODUCT, product });
+export const fetch = products => ({ type: FETCH_PRODUCTS, products });
+export const create = product => ({ type: CREATE_PRODUCT, product });
+export const remove = id => ({ type: REMOVE_PRODUCT, id });
+export const update = product => ({ type: UPDATE_PRODUCT, product });
 
 
 /* ------------       REDUCER     ------------------ */
