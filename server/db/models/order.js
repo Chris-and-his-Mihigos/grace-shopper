@@ -16,18 +16,21 @@ const Order = db.define('order', {
   hasShipped: {
     type: Sequelize.BOOLEAN,
     allowNull: false,
+    defaultValue: false,
     validate: {
     }
   },
   hasArrived: {
     type: Sequelize.BOOLEAN,
     allowNull: false,
+    defaultValue: false,
     validate: {
     }
   },
   isPurchased: {
     type: Sequelize.BOOLEAN,
     allowNull: false,
+    defaultValue: false,
     validate: {
     }
   },
@@ -38,6 +41,7 @@ const Order = db.define('order', {
   },
   isCancelled: {
     type: Sequelize.BOOLEAN,
+    defaultValue: false,
     allowNull: false,
     validate: {
     }
