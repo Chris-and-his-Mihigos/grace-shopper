@@ -21,7 +21,7 @@ export default (orders = [], action) => {
     case FETCH_ORDERS:
       return action.orders;
 
-    case CREATE_ODRER:
+    case CREATE_ORDER:
       return [action.order, ...orders];
 
     case REMOVE_ORDER:
