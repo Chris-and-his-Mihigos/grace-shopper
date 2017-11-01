@@ -42,6 +42,10 @@ const Product = db.define('product', {
     validate: {
     }
   },
+  price: {
+    type: Sequelize.INTEGER,
+    allowNull: false,
+  },
   inventory: {
     type: Sequelize.INTEGER,
     allowNull: false,

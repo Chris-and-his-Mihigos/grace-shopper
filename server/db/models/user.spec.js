@@ -10,25 +10,53 @@ describe('User model', () => {
   })
 
   describe('Model Definition', () => {
-    const user = {
+    const user1 = {
       email: 'ben@ben.ben',
       password: '123',
     };
 
     beforeEach(() =>
       db.sync({ force: true })
-        .then(() => User.create(user)));
+        .then(() => User.create(user1)));
 
-    describe('email', () => {
-      it('should be a string indicating a valid user email', () => {
-        expect(user.email).to.be.a('string')
-        expect(user.email).to.be.equal('ben@ben.ben')
+    describe('save valid email', () => {
+      it('should be a string indicating a user email', () => {
+        expect(user1.email).to.be.a('string')
+        expect(user1.email).to.be.equal('ben@ben.ben')
+      })
+      it('should be unique', (done) => {
+        const user2 = {
+          email: 'ben@ben.ben',
+          password: '321',
+        };
+        User.create(user2)
+          .then((err) => {
+            expect(err.message).to.be.equal('Validation error: email must be unique')
+          })
+          .catch(err => (err));
+        done();
       })
     })
+
+    describe('save invalid email', () => {
+      it('should throw a validation error', (done) => {
+        const user3 = {
+          email: 'max.com',
+          password: '456',
+        };
+        User.create(user3)
+          .then((err) => {
+            expect(err.message).to.be.equal('Validation error: not a valid email address')
+          })
+          .catch(err => (err));
+        done();
+      })
+    })
+
     describe('password', () => {
       it('should be a string indicating a the user password', () => {
-        expect(user.password).to.be.a('string')
-        expect(user.password).to.be.equal('123')
+        expect(user1.password).to.be.a('string')
+        expect(user1.password).to.be.equal('123')
       })
     })
   })
