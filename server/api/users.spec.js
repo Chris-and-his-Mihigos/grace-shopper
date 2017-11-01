@@ -26,7 +26,7 @@ describe('User routes', () => {
         }))
     })
 
-    describe('POST /users/:userId', () => {
+    describe('POST /users/', () => {
       it('should create a new user', () => request(app)
         .post('/api/users')
         .send({ email: 'zeke@zeke.zeke' })
