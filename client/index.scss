@@ -69,5 +69,37 @@ body {
   overflow: hidden;
 }
 
+.itemcard {
+  height:200px
+}
+
+.containerDivForCartItem {
+  display:flex;
+  justify-content: flex-start;
+  width: 80%;
+
+}
+
+.cartSectionWrapper {
+  display:flex;
+  flex-direction:column;
+  justify-content: flex-start;
+  width: 60%;
+
+}
+
+.itemCardWrapper {
+  display:flex;
+
+
+}
+
+#checkoutButtons {
+width:40%;
+display:flex;
+flex-direction: column;
+background-color: red;
+
+}
 }
 
