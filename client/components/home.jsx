@@ -22,7 +22,8 @@ const Home = () => (
       id="videoSegment"
     >
       {
-        // this is the splash page
+        // BEN, I DID A VIDEO THING AGAIN. IT WORKS. I JUST HAVE NO IDEA WHAT I DID 
+        // AND I KNOW THAT I NEED TO REFACTOR THIS. THE MAJORITY OF THE CSS RULES ARE IN INDEX.SCSS.
       }
       <div id="videoDiv">
         <div id="videoBlock">
