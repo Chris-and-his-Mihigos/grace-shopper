@@ -16,6 +16,8 @@ const update = order => ({ type: UPDATE_ORDER, order });
 
 /* ------------       REDUCER     ------------------ */
 
+
+// QUESTION!!: SHOULD WE MAKE A CURRENT CART/ORDER STATE?
 export default (orders = [], action) => {
   switch (action.type) {
     case FETCH_ORDERS:
