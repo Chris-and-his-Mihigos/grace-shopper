@@ -10,4 +10,5 @@ export { default as Home } from './home.jsx'
 export { default as Navigation } from './navigation.jsx'
 export { default as AllAlbums } from './allalbums.jsx'
 export { default as AlbumCard } from './albumcard.jsx'
+export { default as Cart } from './cart.jsx'
 

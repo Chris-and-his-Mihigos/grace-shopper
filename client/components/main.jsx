@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 import { withRouter, Link } from 'react-router-dom'
 import { logout } from '../store'
 import Navigation from './navigation.jsx'
+import Footer from './footer.jsx'
 
 /**
  * COMPONENT
@@ -18,6 +19,7 @@ const Main = (props) => {
     <div>
       <Navigation />
       {children}
+      <Footer />
     </div>
   )
 }
