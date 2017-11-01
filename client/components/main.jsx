@@ -12,7 +12,7 @@ import Navigation from './navigation.jsx'
  *  rendered out by the component's `children`.
  */
 const Main = (props) => {
-  const { children, isLoggedIn } = props
+  const { children } = props
 
   return (
     <div>
@@ -42,8 +42,4 @@ export default withRouter(connect(mapState, mapDispatch)(Main))
 /**
  * PROP TYPES
  */
-Main.propTypes = {
-  children: PropTypes.object,
-  handleClick: PropTypes.func.isRequired,
-  isLoggedIn: PropTypes.bool.isRequired,
-}
+

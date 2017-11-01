@@ -6,7 +6,7 @@ import PropTypes from 'prop-types'
 import history from './history'
 import {Main, Login, Signup, UserHome, Home, AllAlbums } from './components'
 // import ProductListing from './components/productlisting'
-import {me} from './store'
+import { me, fetchOrders, fetchProducts } from './store'
 
 /**
  * COMPONENT
@@ -57,9 +57,11 @@ const mapState = (state) => {
 
 const mapDispatch = (dispatch) => {
   return {
-    loadInitialData () {
-      dispatch(me())
-    }
+    loadInitialData() {
+      dispatch(me());
+      dispatch(fetchOrders());
+      dispatch(fetchProducts());
+    },
   }
 }
 
