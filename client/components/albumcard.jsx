@@ -1,29 +1,37 @@
 import React from 'react'
 import { Card, Icon, Image } from 'semantic-ui-react'
+import { connect } from 'react-redux';
 
-const AlbumCard = () => (
-  <Card>
-    <Image src="abbey_road.jpg" />
-    <Card.Content>
-      <Card.Header>
-        Abbey Road
-      </Card.Header>
-      <Card.Meta>
-        <span className="date">
-          Released in 1969
-        </span>
-      </Card.Meta>
-      <Card.Description>
-        The Beatles
-      </Card.Description>
-    </Card.Content>
-    <Card.Content extra>
-      <a>
-        <Icon name="add to cart" />
-        Add to Cart
+const AlbumCard = (props) => {
+  const { product } = props;
+  return (
+    <Card>
+      <Image src={product.imageUrl} />
+      <Card.Content>
+        <Card.Header>
+          {product.releaseTitle}
+        </Card.Header>
+        <Card.Meta>
+          <span className="date">
+            {product.releaseYear}
+          </span>
+        </Card.Meta>
+        <Card.Description>
+          {product.artists.map(artist => artist)}
+        </Card.Description>
+      </Card.Content>
+      <Card.Content extra>
+        <a>
+          <Icon name="add to cart" />
+          Add to Cart
       </a>
-    </Card.Content>
-  </Card>
-)
+      </Card.Content>
+    </Card>
+  )
+}
 
-export default AlbumCard
+const mapState = ({ state, ownProps }) => ({ state, ownProps })
+const mapDispatch = null;
+
+export default connect(mapState, mapDispatch)(AlbumCard)
+

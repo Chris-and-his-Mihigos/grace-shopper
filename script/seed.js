@@ -104,32 +104,11 @@ const seed = () =>
         Order.create(order))
       ));
 
-// const db = require('../server/db');
+const db = require('../server/db');
 
-// const main = () => {
-//   console.log('Syncing db...');
-//   db.sync({ force: true })
-//     .then(() => {
-//       console.log('Seeding databse...');
-//       return seed();
-//     })
-//     .catch(err => {
-//       console.log('Error while seeding');
-//       console.log(err.stack);
-//     })
-//     .then(() => {
-//       db.close();
-//       return null;
-//     });
-// };
-
-// main();
-
-const dbTest = require('../server/db/dbTest')
-
-const test = () => {
-  console.log('Syncing dbTest...');
-  dbTest.sync({ force: true })
+const main = () => {
+  console.log('Syncing db...');
+  db.sync({ force: true })
     .then(() => {
       console.log('Seeding databse...');
       return seed();
@@ -139,11 +118,9 @@ const test = () => {
       console.log(err.stack);
     })
     .then(() => {
-      dbTest.close();
+      db.close();
       return null;
     });
 };
 
-test();
-
-
+main();

@@ -3,6 +3,9 @@ const { Product, User } = require('../db/models');
 
 module.exports = router;
 
+//QUESTION: Is there a security concern by setting up my API call this way? Specifically we want to know if  Product.findAll
+//exposes the user password in some way under the hood.
+
 router.get('/', (req, res, next) => {
   Product.findAll({ include: [{ model: User, attributes: ['id', 'email'], nested: true }] })
     .then(product => res.json(product))

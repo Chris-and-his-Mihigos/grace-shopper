@@ -18,11 +18,8 @@ export const UserHome = (props) => {
 /**
  * CONTAINER
  */
-const mapState = (state) => {
-  return {
-    email: state.user.email,
-  }
-}
+const mapState = state => ({ email: state.user.email })
+
 
 export default connect(mapState)(UserHome)
 
