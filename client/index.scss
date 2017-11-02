@@ -1,5 +1,7 @@
 body {
-  font-family: sans-serif;
+  h3 {
+    font-family: 'Permanent Marker', cursive !important;
+  }
 
   a {
     text-decoration: none;
@@ -98,7 +100,9 @@ body {
 width:40%;
 display:flex;
 flex-direction: column;
-background-color: red;
+align-content: center;
+padding-top: 3em;
+padding-right: 3em;
 }
 
 #searchIcon {

@@ -8,6 +8,7 @@ import {
 } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 import Title from './title.jsx'
+import CartPricing from './cartpricing.jsx'
 
 const Cart = props => (
   <div>
@@ -219,7 +220,8 @@ const Cart = props => (
         </div>
       </div>
       <div id="checkoutButtons">
-      Put checkout button stuff here
+      <CartPricing subtotal="46" />
+
       </div>
     </div>
     {
