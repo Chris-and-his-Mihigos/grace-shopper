@@ -228,7 +228,7 @@ const Cart = props => (
   </div>
 );
 
-const mapState = ({ products }) => ({ products });
+const mapState = state => ({ products: state.products, cartId: state.cartIDred });
 const mapDispatch = null;
 
 export default connect(mapState, mapDispatch)(Cart);

@@ -22,6 +22,7 @@ router.post('/', (req, res, next) => {
 });
 
 router.put('/:orderId', (req, res, next) => {
+  console.log('orderRoute', req.params.orderId);
   Order.findById(req.params.orderId)
     .then(order => order.update(req.body))
     .then(order => res.status(201).send(order))
