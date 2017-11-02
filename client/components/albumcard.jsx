@@ -7,12 +7,12 @@ const AlbumCard = (props) => {
   return (
     <Card>
       <Image
-        src='abbey_road.jpg'
+        src="abbey_road.jpg"
         label={{
           as: 'a',
           size: 'large',
           color: 'green',
-          content: '$20',
+          content: `$${product.price}.99`,
           icon: 'money',
           ribbon: true,
         }}

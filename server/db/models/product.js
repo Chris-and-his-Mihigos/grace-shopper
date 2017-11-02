@@ -45,6 +45,7 @@ const Product = db.define('product', {
   price: {
     type: Sequelize.INTEGER,
     allowNull: false,
+    defaultValue: 20,
   },
   inventory: {
     type: Sequelize.INTEGER,
