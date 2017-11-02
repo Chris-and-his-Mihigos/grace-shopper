@@ -1,4 +1,5 @@
 const faker = require('faker');
+const chance = require('chance')(123);
 
 const User = require('../server/db/models/user');
 const Product = require('../server/db/models/product');
@@ -20,18 +21,22 @@ function randomInt(min, max) {
   return Math.floor(Math.random() * ((Math.floor(max) - Math.ceil(min)) + 1)) + min;
 }
 
+const emails = chance.unique(chance.email, 20);
+
 // FAKE MODEL GENERATORS
 const fakeUserGenerator = () => {
   const user = {
-    email: faker.internet.email(),
+    email: emails.pop(),
     password: faker.internet.password(),
   }
   fakeUsers.push(user);
 }
 
+const releaseTitles = chance.unique(chance.word, 50);
+
 const fakeProductGenerator = () => {
   const product = {
-    releaseTitle: faker.lorem.words(),
+    releaseTitle: releaseTitles.pop(),
     artists: [faker.name.firstName() + ' ' + faker.name.lastName()],
     genre: fakeGenres[randomInt(0, 4)],
     releaseYear: randomInt(1920, 2017),
@@ -39,6 +44,7 @@ const fakeProductGenerator = () => {
     songsInfo: [{ title: faker.fake('{{lorem.words}}'), duration: (randomInt(1,9).toString() + ":" + randomInt(0,9).toString() + randomInt(0,9).toString()) }],
     label: fakeLabels[randomInt(0, 4)],
     inventory: randomInt(0, 100),
+    price: randomInt(1, 50),
     tags: [fakeTags[randomInt(0, 3)], fakeTags[randomInt(0, 3)]],
   }
   fakeProducts.push(product);
@@ -46,7 +52,7 @@ const fakeProductGenerator = () => {
 
 const fakeReviewGenerator = () => {
   const review = {
-    text: faker.lorem.text(),
+    text: 'Here is my review of this record. Much taste and forward thinking opinions.',
     rating: randomInt(0, 5),
     userId: randomInt(1, 20),
     productId: randomInt(1, 50),
@@ -58,12 +64,9 @@ const fakeReviewGenerator = () => {
 const fakeOrderGenerator = () => {
   const order = {
     items: [fakeProducts[randomInt(0, 49)], fakeProducts[randomInt(0, 49)]],
+    status: 'cart',
     sessionId: faker.random.number().toString(),
-    hasShipped: false,
-    hasArrived: false,
-    isPurchased: false,
     userId: randomInt(1, 20).toString(),
-    isCancelled: false,
   }
   fakeOrders.push(order);
 }
@@ -89,8 +92,7 @@ for (let i = 0; i < 40; i++) {
 
 const seed = () =>
   Promise.all(fakeUsers.map(user =>
-    User.create(user))
-  )
+    User.create(user)))
     .then(() =>
       Promise.all(fakeProducts.map(product =>
         Product.create(product))
