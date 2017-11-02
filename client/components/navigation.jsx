@@ -40,7 +40,7 @@ const Navigation = (props) => {
               {/* The navbar will show these links before you log in */}
               <Button inverted as={Link} to="/login">Log In</Button>
               <Button inverted as={Link} to="/signup" style={{ marginLeft: '0.5em' }}>Sign Up</Button>
-              <Button inverted as={Link} to="/cart"><Icon name="cart" />Cart</Button>
+              <Button inverted as={Link} to="/cart" style={{ marginLeft: '0.5em' }}><Icon name="cart" />Cart</Button>
             </Menu.Item>
             }
         </Menu>

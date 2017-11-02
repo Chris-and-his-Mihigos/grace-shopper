@@ -11,4 +11,7 @@ export { default as Navigation } from './navigation.jsx'
 export { default as AllAlbums } from './allalbums.jsx'
 export { default as AlbumCard } from './albumcard.jsx'
 export { default as Cart } from './cart.jsx'
+export { default as CartItem } from './cartitem.jsx'
+export { default as Title } from './title.jsx'
+
 
