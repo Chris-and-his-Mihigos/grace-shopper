@@ -13,5 +13,4 @@ export { default as AlbumCard } from './albumcard.jsx'
 export { default as Cart } from './cart.jsx'
 export { default as CartItem } from './cartitem.jsx'
 export { default as Title } from './title.jsx'
-
-
+export { default as AboutUs } from './aboutus.jsx'

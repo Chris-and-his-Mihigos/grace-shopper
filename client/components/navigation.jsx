@@ -26,7 +26,6 @@ const Navigation = (props) => {
           <Menu.Item as={Link} to="/"><Icon name="home" />Home</Menu.Item>
           <Menu.Item as={Link} to="/allalbums">All Albums</Menu.Item>
           <Menu.Item as={Link} to="/aboutus">About Us</Menu.Item>
-          <Menu.Item as={Link} to="/contact">Contact</Menu.Item>
           {
           isLoggedIn
           ?
