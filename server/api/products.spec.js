@@ -19,6 +19,7 @@ describe('Product routes', () => {
       songsInfo: [{ title: 'Example Title', duration: '3:30 ' }],
       label: 'Best Label',
       inventory: 100,
+      price: 10,
       tags: ['chill'],
     }
 
@@ -31,6 +32,7 @@ describe('Product routes', () => {
       songsInfo: [{ title: 'Example Title', duration: '3:30 ' }],
       label: 'Best Label',
       inventory: 100,
+      price: 10,
       tags: ['chill'],
     }
 

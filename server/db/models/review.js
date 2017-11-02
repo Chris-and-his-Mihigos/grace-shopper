@@ -6,12 +6,12 @@ const Review = db.define('review', {
     type: Sequelize.TEXT,
     validate: {
       len: [20, 300],
-    }
+    },
   },
   rating: {
     type: Sequelize.INTEGER,
     validate: {
-    }
+    },
   },
 },
 {
