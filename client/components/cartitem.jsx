@@ -26,7 +26,7 @@ const CartItem = (props) => {
               as: 'a',
               size: 'large',
               color: 'green',
-              content: `$${product.price}.99`,
+              content: `$${product.price}.00`,
               icon: 'money',
               ribbon: true,
             }}
@@ -47,7 +47,7 @@ const CartItem = (props) => {
   );
 };
 
-const mapState = ({ state, ownProps }) => ({ state, ownProps });
+const mapState = state => ({ cartId: state.cartId, cart: state.cart });
 const mapDispatch = null;
 
 export default connect(mapState, mapDispatch)(CartItem);

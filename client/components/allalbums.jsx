@@ -114,7 +114,7 @@ class AllAlbums extends React.Component {
   }
 }
 
-const mapState = ({ products }) => ({ products })
+const mapState = state => ({ products: state.products })
 const mapDispatch = null;
 
 export default connect(mapState, mapDispatch)(AllAlbums);
