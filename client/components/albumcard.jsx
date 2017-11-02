@@ -38,11 +38,9 @@ const AlbumCard = (props) => {
   );
 };
 
-const mapState = state => ({ cart: state.cart, cartId: state.cartIDred });
+const mapState = state => ({ cart: state.cart, cartId: state.cartId });
 const mapDispatch = dispatch => ({
   handleSubmit(event, product, cart, cartId) {
-    console.log('cartlen', cart.length)
-    console.log(cartId)
     let item;
     event.preventDefault();
     if (!cart.length) {
@@ -55,7 +53,6 @@ const mapDispatch = dispatch => ({
       userId: 1,
       cartID: 1,
     }
-    console.log('item', order)
     if (cart.length) dispatch(updateCart(cartId, order))
     else dispatch(addCart(order))
   },

@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 
 const CartItem = (props) => {
   const { product } = props;
+  console.log("Im here");
   return (
     <div className="containerDivForCartItem">
       <Grid
@@ -47,7 +48,7 @@ const CartItem = (props) => {
   );
 };
 
-const mapState = ({ state, ownProps }) => ({ state, ownProps });
+const mapState = state => ({ cartId: state.cartId, cart: state.cart });
 const mapDispatch = null;
 
 export default connect(mapState, mapDispatch)(CartItem);
