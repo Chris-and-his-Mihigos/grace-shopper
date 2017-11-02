@@ -15,7 +15,7 @@ const AlbumCard = (props) => {
           as: 'a',
           size: 'large',
           color: 'green',
-          content: `$${product.price}.99`,
+          content: `$${product.price}.00`,
           icon: 'money',
           ribbon: true,
         }}

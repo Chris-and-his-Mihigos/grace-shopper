@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 
 const CartItem = (props) => {
   const { product } = props;
-  console.log("Im here");
   return (
     <div className="containerDivForCartItem">
       <Grid
@@ -27,7 +26,7 @@ const CartItem = (props) => {
               as: 'a',
               size: 'large',
               color: 'green',
-              content: `$${product.price}.99`,
+              content: `$${product.price}.00`,
               icon: 'money',
               ribbon: true,
             }}

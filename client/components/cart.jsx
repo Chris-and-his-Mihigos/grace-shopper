@@ -33,7 +33,7 @@ const Cart = (props) => {
       }
       <div className="itemCardWrapper">
         <div className="cartSectionWrapper">
-          {cart.length ? cart[0].items.map(item => <CartItem key={item} product={item.product} />) : <div />}
+          {cart.length ? cart[0].items.map((item, index) => <CartItem key={index} product={item.product} />) : <div />}
         </div>
         <div id="checkoutButtons">
           <CartPricing subtotal={val} />
