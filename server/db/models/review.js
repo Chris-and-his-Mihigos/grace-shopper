@@ -4,9 +4,11 @@ const db = require('../db')
 const Review = db.define('review', {
   text: {
     type: Sequelize.TEXT,
+    defaultValue: 'This is the best album in the whole wide world',
     validate: {
       len: [20, 300],
-    }
+    },
+
   },
   rating: {
     type: Sequelize.INTEGER,

@@ -16,6 +16,7 @@ import {
 } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 import AlbumCard from './albumcard.jsx';
+import Title from './title.jsx'
 
 class AllAlbums extends React.Component {
   constructor(props) {
@@ -100,30 +101,7 @@ class AllAlbums extends React.Component {
           {this.renderTitleSearch()}
           <br />
         </div>
-
-        <Segment
-          inverted
-          textAlign="center"
-          style={{
-            paddingBottom: 1,
-            paddingTop: 2,
-          }}
-          vertical
-        >
-          <Container text>
-            <Header
-              as="h1"
-              content="Albums"
-              inverted
-              style={{
-                fontSize: '4em',
-                fontWeight: 'normal',
-                marginBottom: 20,
-                padding: '0em 0em',
-              }}
-            />
-          </Container>
-        </Segment>
+        <Title title="Albums" />
 
         <Card.Group id="albumcards">
           {products.length ?
