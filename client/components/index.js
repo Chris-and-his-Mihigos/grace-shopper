@@ -15,4 +15,4 @@ export { default as CartItem } from './cartitem.jsx'
 export { default as Title } from './title.jsx'
 export { default as AboutUs } from './aboutus.jsx'
 export { default as CartPricing } from './cartpricing.jsx'
-
+export { default as SingleAlbum } from './singlealbum.jsx'
