@@ -7,228 +7,47 @@ import {
   Select,
 } from 'semantic-ui-react';
 import { connect } from 'react-redux';
-import Title from './title.jsx'
+import Title from './title.jsx';
+import CartPricing from './cartpricing.jsx';
+import CartItem from './cartitem.jsx';
 
-const Cart = props => (
-  <div>
-    {
-      // Shopping Cart header
-    }
-    <Title title="Shopping Cart" />
 
-    {
-      // Item Card
-    }
-    <div className="itemCardWrapper">
-      <div className="cartSectionWrapper">
-        <div className="containerDivForCartItem">
-          <Grid
-            stretched
-            columns={3}
-            verticalAlign="middle"
-            centered
-            className="itemcard"
-          >
-            <Grid.Column className="cartleftgrid" textAlign="center">
-              <Header as="h1">Abbey Road</Header>
-              <p>1969</p>
-              <p>Artists</p>
-            </Grid.Column>
-            <Grid.Column>
-              <Image
-                size="small"
-                src="abbey_road.jpg"
-                label={{
-                  as: 'a',
-                  size: 'large',
-                  color: 'green',
-                  content: '$20',
-                  icon: 'money',
-                  ribbon: true,
-                }}
-              />
-            </Grid.Column>
-            <Grid.Column textAlign="center">
-              <Select
-                placeholder="Select a quantity"
-                options={[1, 2, 3, 4, 5].map(num => ({
-                  text: num,
-                  value: num,
-                }))}
-              />
-              <Button secondary>Remove</Button>
-            </Grid.Column>
-          </Grid>
-        </div>
+const Cart = (props) => {
+  const { cart } = props;
+  let val = 0;
+  if (cart.length) {
+    cart[0].items.forEach((item) => {
+      val += (item.product.price * item.qty)
+      return val
+    })
+  }
 
-        <div className="containerDivForCartItem">
-          <Grid
-            stretched
-            columns={3}
-            verticalAlign="middle"
-            centered
-            className="itemcard"
-          >
-            <Grid.Column className="cartleftgrid" textAlign="center">
-              <Header as="h1">Abbey Road</Header>
-              <p>1969</p>
-              <p>Artists</p>
-            </Grid.Column>
-            <Grid.Column>
-              <Image
-                size="small"
-                src="abbey_road.jpg"
-                label={{
-                  as: 'a',
-                  size: 'large',
-                  color: 'green',
-                  content: '$20',
-                  icon: 'money',
-                  ribbon: true,
-                }}
-              />
-            </Grid.Column>
-            <Grid.Column textAlign="center">
-              <Select
-                placeholder="Select a quantity"
-                options={[1, 2, 3, 4, 5].map(num => ({
-                  text: num,
-                  value: num,
-                }))}
-              />
-              <Button secondary>Remove</Button>
-            </Grid.Column>
-          </Grid>
+  return (
+    <div>
+      {
+        // Shopping Cart header
+      }
+      <Title title="Shopping Cart" />
+
+      {
+      }
+      <div className="itemCardWrapper">
+        <div className="cartSectionWrapper">
+          {cart.length ? cart[0].items.map((item, index) => <CartItem key={index} product={item.product} />) : <div />}
         </div>
-        <div className="containerDivForCartItem">
-          <Grid
-            stretched
-            columns={3}
-            verticalAlign="middle"
-            centered
-            className="itemcard"
-          >
-            <Grid.Column className="cartleftgrid" textAlign="center">
-              <Header as="h1">Abbey Road</Header>
-              <p>1969</p>
-              <p>Artists</p>
-            </Grid.Column>
-            <Grid.Column>
-              <Image
-                size="small"
-                src="abbey_road.jpg"
-                label={{
-                  as: 'a',
-                  size: 'large',
-                  color: 'green',
-                  content: '$20',
-                  icon: 'money',
-                  ribbon: true,
-                }}
-              />
-            </Grid.Column>
-            <Grid.Column textAlign="center">
-              <Select
-                placeholder="Select a quantity"
-                options={[1, 2, 3, 4, 5].map(num => ({
-                  text: num,
-                  value: num,
-                }))}
-              />
-              <Button secondary>Remove</Button>
-            </Grid.Column>
-          </Grid>
-        </div>
-        <div className="containerDivForCartItem">
-          <Grid
-            stretched
-            columns={3}
-            verticalAlign="middle"
-            centered
-            className="itemcard"
-          >
-            <Grid.Column className="cartleftgrid" textAlign="center">
-              <Header as="h1">Abbey Road</Header>
-              <p>1969</p>
-              <p>Artists</p>
-            </Grid.Column>
-            <Grid.Column>
-              <Image
-                size="small"
-                src="abbey_road.jpg"
-                label={{
-                  as: 'a',
-                  size: 'large',
-                  color: 'green',
-                  content: '$20',
-                  icon: 'money',
-                  ribbon: true,
-                }}
-              />
-            </Grid.Column>
-            <Grid.Column textAlign="center">
-              <Select
-                placeholder="Select a quantity"
-                options={[1, 2, 3, 4, 5].map(num => ({
-                  text: num,
-                  value: num,
-                }))}
-              />
-              <Button secondary>Remove</Button>
-            </Grid.Column>
-          </Grid>
-        </div>
-        <div className="containerDivForCartItem">
-          <Grid
-            stretched
-            columns={3}
-            verticalAlign="middle"
-            centered
-            className="itemcard"
-          >
-            <Grid.Column className="cartleftgrid" textAlign="center">
-              <Header as="h1">Abbey Road</Header>
-              <p>1969</p>
-              <p>Artists</p>
-            </Grid.Column>
-            <Grid.Column>
-              <Image
-                size="small"
-                src="abbey_road.jpg"
-                label={{
-                  as: 'a',
-                  size: 'large',
-                  color: 'green',
-                  content: '$20',
-                  icon: 'money',
-                  ribbon: true,
-                }}
-              />
-            </Grid.Column>
-            <Grid.Column textAlign="center">
-              <Select
-                placeholder="Select a quantity"
-                options={[1, 2, 3, 4, 5].map(num => ({
-                  text: num,
-                  value: num,
-                }))}
-              />
-              <Button secondary>Remove</Button>
-            </Grid.Column>
-          </Grid>
+        <div id="checkoutButtons">
+          <CartPricing subtotal={val} />
+
         </div>
       </div>
-      <div id="checkoutButtons">
-      Put checkout button stuff here
-      </div>
+      {
+        // Checkout Segment
+      }
     </div>
-    {
-      // Checkout Segment
-    }
-  </div>
-);
+  )
+};
 
-const mapState = ({ products }) => ({ products });
+const mapState = state => ({ products: state.products, cartId: state.cartId, cart: state.cart });
 const mapDispatch = null;
 
 export default connect(mapState, mapDispatch)(Cart);

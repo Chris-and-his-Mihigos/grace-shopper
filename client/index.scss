@@ -1,5 +1,7 @@
 body {
-  font-family: sans-serif;
+  h3 {
+    font-family: 'Permanent Marker', cursive !important;
+  }
 
   a {
     text-decoration: none;
@@ -76,6 +78,7 @@ body {
 .containerDivForCartItem {
   display:flex;
   justify-content: flex-start;
+  flex-direction: column;
   width: 80%;
 
 }
@@ -98,7 +101,9 @@ body {
 width:40%;
 display:flex;
 flex-direction: column;
-background-color: red;
+align-content: center;
+padding-top: 3em;
+padding-right: 3em;
 }
 
 #searchIcon {
@@ -112,4 +117,14 @@ margin-left: 1em;
   display: flex;
   justify-content: center;
 }
+}
+
+.login-form > body > div,
+.login-form > body > div > div,
+.login-form > body > div > div > div.login-form {
+  height: 100%;
+}
+.login-form,
+.backgroundcolor {
+  background-color: #1b1c1d
 }

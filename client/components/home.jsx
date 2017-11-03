@@ -69,7 +69,7 @@ const Home = () => (
               List of Albums that start with some other letter
             </p>
             <Header as="h3" style={{ fontSize: '2em' }}>
-              1-HOUR SHIPPING
+              FREE SHIPPING
             </Header>
             <p style={{ fontSize: '1.33em' }}>
               Yes that's right, you thought it was the stuff of dreams, but
@@ -82,7 +82,6 @@ const Home = () => (
         </Grid.Row>
         <Grid.Row>
           <Grid.Column textAlign="center">
-            <Button size="huge">Check Them Out</Button>
           </Grid.Column>
         </Grid.Row>
       </Grid>

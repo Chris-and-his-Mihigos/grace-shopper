@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { updateID } from './cart';
 
 /* -----------------    ACTION TYPES ------------------ */
 
@@ -54,8 +55,11 @@ export const removeOrder = id => (dispatch) => {
 
 export const addOrder = order => (dispatch) => {
   axios.post('/api/orders', order)
-    .then(res => dispatch(create(res.data)))
-    .catch(err => console.error(`Creating user: ${order} unsuccesful`, err));
+    .then((res) => {
+      dispatch(create(res.data))
+      dispatch(updateID(res.data.id))
+    })
+    .catch(err => console.error(`Creating order: ${order} unsuccesful`, err));
 };
 
 export const updateOrder = (id, order) => (dispatch) => {
@@ -63,3 +67,4 @@ export const updateOrder = (id, order) => (dispatch) => {
     .then(res => dispatch(update(res.data)))
     .catch(err => console.error(`Updating order: ${order} unsuccesful`, err));
 };
+

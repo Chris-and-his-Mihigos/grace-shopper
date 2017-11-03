@@ -4,7 +4,7 @@ import { Router } from 'react-router';
 import { Route, Switch } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import history from './history';
-import { Main, Login, Signup, UserHome, Home, AllAlbums, Cart, AboutUs } from './components';
+import { Main, Login, Signup, UserHome, Home, AllAlbums, Cart, AboutUs, SingleAlbum } from './components';
 // import ProductListing from './components/productlisting'
 import { me, fetchOrders, fetchProducts } from './store';
 
@@ -29,6 +29,7 @@ class Routes extends Component {
             <Route path="/allalbums" component={AllAlbums} />
             <Route path="/cart" component={Cart} />
             <Route path="/aboutus" component={AboutUs} />
+            <Route path="/album/:id" component={SingleAlbum}/>            
             <Route path="/" component={Home} />
             {isLoggedIn && (
               <Switch>
