@@ -4,10 +4,33 @@
     <meta charset='utf-8'>
     <meta name='viewport' content='width=device-width initial-scale=1.0'>
     <title>Boilermaker</title>
-    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.12/semantic.min.css"></link>    
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.12/semantic.min.css"></link>
     <script defer src="/bundle.js"></script>
   </head>
   <body>
+
+      <script>
+          window.fbAsyncInit = function() {
+            FB.init({
+              appId      : '1524071661014675',
+              cookie     : true,
+              xfbml      : true,
+              version    : 'v2.10'
+            });
+
+            FB.AppEvents.logPageView();
+
+          };
+
+          (function(d, s, id){
+             var js, fjs = d.getElementsByTagName(s)[0];
+             if (d.getElementById(id)) {return;}
+             js = d.createElement(s); js.id = id;
+             js.src = "https://connect.facebook.net/en_US/sdk.js";
+             fjs.parentNode.insertBefore(js, fjs);
+           }(document, 'script', 'facebook-jssdk'));
+          </script>
+
     <div id="app"></div>
   </body>
 </html>

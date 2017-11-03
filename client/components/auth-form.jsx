@@ -27,7 +27,10 @@ const AuthForm = (props) => {
         </div>
         {error && error.response && <div> {error.response.data} </div>}
       </form>
+
       <a href="/auth/google">{displayName} with Google</a>
+      <a href="auth/facebook">{displayName} with Facebook</a>
+
     </div>
   )
 }
@@ -75,5 +78,5 @@ AuthForm.propTypes = {
   name: PropTypes.string.isRequired,
   displayName: PropTypes.string.isRequired,
   handleSubmit: PropTypes.func.isRequired,
-  error: PropTypes.object
+  error: PropTypes.object,
 }

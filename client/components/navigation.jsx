@@ -7,13 +7,17 @@ import {
   Segment,
   Divider,
 } from 'semantic-ui-react'
+import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
+import { logout } from '../store/user'
+
 
 const Navigation = (props) => {
-  const { handleClick, isLoggedIn } = props
+  const { handleClick, isLoggedIn, LogOut } = props
 
   return (
+
     <Segment
       inverted
       textAlign="center"
@@ -21,17 +25,18 @@ const Navigation = (props) => {
       vertical
     >
       <Container>
-
+        {console.log(isLoggedIn)}
         <Menu inverted pointing secondary size="large">
           <Menu.Item as={Link} to="/"><Icon name="home" />Home</Menu.Item>
           <Menu.Item as={Link} to="/allalbums">All Albums</Menu.Item>
           <Menu.Item as={Link} to="/aboutus">About Us</Menu.Item>
           {
+
           isLoggedIn
           ?
             <Menu.Item position="right">
               {/* The navbar will show these links after you log in */}
-              <Button inverted as={Link} onClick={handleClick} to="/">Log Out</Button>
+              <Button inverted as={Link} onClick={handleClick} to="/login">Log Out</Button>
               <Button inverted as={Link} to="/cart"><Icon name="cart" />Cart</Button>
             </Menu.Item>
           :
@@ -49,8 +54,20 @@ const Navigation = (props) => {
   )
 }
 
-export default Navigation
 
+const mapState = state => ({
+  isLoggedIn: !!state.user.id,
+})
+
+const mapDispatch = dispatch => ({
+  handleClick: () => {
+    console.log('You signed out!');
+    dispatch(logout())
+    // browserHistory.push('/');
+  },
+});
+
+export default connect(mapState, mapDispatch)(Navigation);
 /**
  * PROP TYPES
  */
