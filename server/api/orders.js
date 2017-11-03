@@ -16,6 +16,7 @@ router.get('/:id', (req, res, next) => {
 });
 
 router.post('/', (req, res, next) => {
+  console.log('addBody', req.body);
   Order.create(req.body)
     .then(order => res.status(201).json(order))
     .catch(next);
@@ -23,6 +24,7 @@ router.post('/', (req, res, next) => {
 
 router.put('/:orderId', (req, res, next) => {
   console.log('orderRoute', req.params.orderId);
+  console.log('orderBody', req.body);
   Order.findById(req.params.orderId)
     .then(order => order.update(req.body))
     .then(order => res.status(201).send(order))

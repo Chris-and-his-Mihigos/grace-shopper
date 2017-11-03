@@ -1,8 +1,8 @@
 import React from 'react';
 import { Image, Grid, Header, Select, Button } from 'semantic-ui-react';
 import { connect } from 'react-redux';
-import {removeCart } from '../store/cart';
-import { updateOrder } from '../store/orders';
+import { removeCart } from '../store/cart';
+
 
 const CartItem = (props) => {
   const { product, handleSubmit, cart, cartId } = props;
@@ -42,7 +42,7 @@ const CartItem = (props) => {
               value: num,
             }))}
           />
-          <Button onClick={event => handleSubmit(event, product.id)} secondary>Remove</Button>
+          <Button onClick={event => handleSubmit(event, product.id, cart, cartId)} secondary>Remove</Button>
         </Grid.Column>
       </Grid>
     </div>
@@ -51,9 +51,10 @@ const CartItem = (props) => {
 
 const mapState = state => ({ cartId: state.cartId, cart: state.cart });
 const mapDispatch = dispatch => ({
-  handleSubmit(event, id) {
+  handleSubmit(event, id, cart, cartId) {
     event.preventDefault();
-    dispatch(removeCart(id))
+    const order = Object.assign({}, cart[0], { items: cart[0].items.filter(item => item.product.id !== id) })
+    dispatch(removeCart(id, cartId, order))
   },
 })
 

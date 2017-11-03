@@ -67,3 +67,4 @@ export const updateOrder = (id, order) => (dispatch) => {
     .then(res => dispatch(update(res.data)))
     .catch(err => console.error(`Updating order: ${order} unsuccesful`, err));
 };
+

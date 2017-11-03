@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { addOrder, updateOrder, removeOrder } from './orders';
+import { addOrder, updateOrder } from './orders';
 
 /* -----------------    ACTION TYPES ------------------ */
 
@@ -58,8 +58,10 @@ export const fetchCart = cart => (dispatch) => {
 };
 
 // optimistic
-export const removeCart = id => (dispatch) => {
+export const removeCart = (id, cartId, cart) => (dispatch) => {
+  console.log('cart', cart);
   dispatch(remove(id));
+  dispatch(updateOrder(cartId, Object.assign({}, cart)))
 };
 
 export const addCart = cart => (dispatch) => {
@@ -69,7 +71,7 @@ export const addCart = cart => (dispatch) => {
 
 export const updateCart = (id, cart) => (dispatch) => {
   dispatch(update(cart))
-  dispatch(updateOrder(id, cart))
+  dispatch(updateOrder(id, Object.assign({}, cart)))
 };
 
 export const updateID = id => (dispatch) => {
