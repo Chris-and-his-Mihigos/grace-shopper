@@ -26,11 +26,12 @@ const Product = db.define('product', {
     validate: {
     }
   },
-  imageUrl: {
+  image: {
     type: Sequelize.STRING,
-    validate: {
-      isUrl: true,
-    }
+    defaultValue: 'abbey_road.jpg',
+    // validate: {
+    //   isUrl: true,
+    // }
   },
   songsInfo: {
     type: Sequelize.ARRAY(Sequelize.JSON),
