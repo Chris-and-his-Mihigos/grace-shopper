@@ -13,6 +13,7 @@ const AuthForm = (props) => {
   } = props;
 
   return (
+
     <div className="login-form">
       <Grid
         textAlign="center"
@@ -47,6 +48,8 @@ const AuthForm = (props) => {
           </Form>
           <Message>
             {displayName} with <a href="/auth/google">Google</a>
+            {displayName} with <a href="auth/facebook">Facebook</a>
+
           </Message>
         </Grid.Column>
       </Grid>
