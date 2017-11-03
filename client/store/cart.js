@@ -27,7 +27,7 @@ export const cart = (carts = [], action) => {
       return [action.cart];
 
     case REMOVE_CART:
-      return carts.filter(cart => cart.id !== action.id);
+      return [Object.assign({}, carts[0], { items: carts[0].items.filter(item => item.product.id !== action.id) })];
 
     case UPDATE_CART:
       return carts.map(cart => (
@@ -60,7 +60,6 @@ export const fetchCart = cart => (dispatch) => {
 // optimistic
 export const removeCart = id => (dispatch) => {
   dispatch(remove(id));
-  dispatch(removeOrder(id))
 };
 
 export const addCart = cart => (dispatch) => {
