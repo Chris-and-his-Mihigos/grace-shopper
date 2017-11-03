@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 import {
   Container,
   Grid,
@@ -6,18 +6,19 @@ import {
   List,
   Segment,
   Modal,
-  Image
-} from "semantic-ui-react";
+} from 'semantic-ui-react';
 
-const Footer = props => (
-  <Segment inverted vertical style={{ padding: "5em 0em" }}>
+const Footer = () => (
+  <Segment inverted vertical style={{ padding: '5em 0em' }}>
     <Container>
       <Grid divided inverted stackable>
         <Grid.Row>
           <Grid.Column width={3}>
             <Header inverted as="h4" content="About" />
             <List link inverted>
-              <List.Item as="a">About Us</List.Item>
+              <List.Item as="a" href="/aboutus">
+                About Us
+              </List.Item>
             </List>
           </Grid.Column>
           <Grid.Column width={3}>
@@ -64,20 +65,22 @@ const Footer = props => (
                     <h3>Before an order has shipped:</h3>
                     <p>
                       If your order has not yet been shipped, please call us at
-                      one of our locations to cancel your order. <br />You
-                      can find our number on the About Us page.
+                      one of our locations to cancel your order. <br />You can
+                      find our number on the About Us page.
                     </p>
                   </Modal.Description>
                 </Modal.Content>
               </Modal>
-
             </List>
           </Grid.Column>
           <Grid.Column width={7}>
             <Header as="h4" inverted>
-              Some sweet sweet music quote
+              Interested in working with us?
             </Header>
-            <p>The bestest music quote in the world.</p>
+            <p>
+              Get to know who we are in the About Us page, call one of our
+              stores, and tell us your story.
+            </p>
           </Grid.Column>
         </Grid.Row>
       </Grid>

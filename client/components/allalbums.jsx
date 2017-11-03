@@ -33,7 +33,7 @@ class AllAlbums extends React.Component {
   }
 
   filterTitle(album) {
-    // this is necessary as a user can be deleted and his stories are orphaned
+    // this is necessary as a user can be deleted and his reviews are orphaned
     const artistName = album.artists[0];
     const titleMatch = new RegExp(this.state.title, 'i');
     const artistMatch = new RegExp(this.state.artist, 'i');
@@ -96,7 +96,7 @@ class AllAlbums extends React.Component {
   render() {
     const { products } = this.props;
     return (
-      <div>
+      <div className='backgroundcolor'>
         <div className="container">
           {this.renderTitleSearch()}
           <br />

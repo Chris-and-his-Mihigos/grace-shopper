@@ -118,3 +118,13 @@ margin-left: 1em;
   justify-content: center;
 }
 }
+
+.login-form > body > div,
+.login-form > body > div > div,
+.login-form > body > div > div > div.login-form {
+  height: 100%;
+}
+.login-form,
+.backgroundcolor {
+  background-color: #1b1c1d
+}
