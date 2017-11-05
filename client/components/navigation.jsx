@@ -25,7 +25,6 @@ const Navigation = (props) => {
       vertical
     >
       <Container>
-        {console.log(isLoggedIn)}
         <Menu inverted pointing secondary size="large">
           <Menu.Item as={Link} to="/"><Icon name="home" />Home</Menu.Item>
           <Menu.Item as={Link} to="/allalbums">All Albums</Menu.Item>

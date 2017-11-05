@@ -52,14 +52,21 @@ export const cartIDred = (cartID = 0, action) => {
 
 /* ------------   THUNK CREATORS     ------------------ */
 
-export const fetchCart = cart => (dispatch) => {
-  axios.get(`/api/orders/${cart.id}`)
-    .then(res => dispatch(fetch(res.data)));
+export const fetchCart = user => (dispatch) => {
+  let fetchId;
+  if (user.id) fetchId = user.id
+  else fetchId = user
+  axios.get(`/api/cart/${fetchId}`)
+    .then((res) => {
+      if ((res.data).length) {
+        dispatch(fetch(res.data[0]))
+        dispatch(cartId(res.data[0].id))
+      }
+    });
 };
 
 // optimistic
 export const removeCart = (id, cartId, cart) => (dispatch) => {
-  console.log('cart', cart);
   dispatch(remove(id));
   dispatch(updateOrder(cartId, Object.assign({}, cart)))
 };
@@ -68,6 +75,11 @@ export const addCart = cart => (dispatch) => {
   dispatch(create(cart))
   dispatch(addOrder(cart))
 };
+
+export const addToCart = (id, cart) => (dispatch) => {
+  dispatch(create(cart));
+  dispatch(updateOrder(id, Object.assign({}, cart)))
+}
 
 export const updateCart = (id, cart) => (dispatch) => {
   dispatch(update(cart))

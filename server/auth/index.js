@@ -37,8 +37,13 @@ router.post('/logout', (req, res) => {
 })
 
 router.get('/me', (req, res) => {
-  res.json(req.user)
+  res.json(req.user);
 })
+
+router.get('/sessionId', (req, res) => {
+  res.json(req.session.sessionId);
+});
+
 
 router.use('/google', require('./google'))
 router.use('/facebook', require('./facebook'))

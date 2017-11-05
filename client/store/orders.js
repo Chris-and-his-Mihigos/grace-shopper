@@ -56,6 +56,7 @@ export const removeOrder = id => (dispatch) => {
 export const addOrder = order => (dispatch) => {
   axios.post('/api/orders', order)
     .then((res) => {
+      console.log(res);
       dispatch(create(res.data))
       dispatch(updateID(res.data.id))
     })
