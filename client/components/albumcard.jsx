@@ -8,9 +8,9 @@ const AlbumCard = (props) => {
     product, cart, handleSubmit, cartId, user, session,
   } = props;
   return (
-    <Card>
+    <Card href={`album/${product.id}`}>
       <Image
-        src="abbey_road.jpg"
+        src="https://upload.wikimedia.org/wikipedia/en/5/54/Public_image_ltd_album_cover.jpg"
         label={{
           as: 'a',
           size: 'large',
@@ -18,7 +18,10 @@ const AlbumCard = (props) => {
           content: `$${product.price}.00`,
           icon: 'money',
           ribbon: true,
+          href: `album/${product.id}`,
         }}
+        
+        
       />
       <Card.Content>
         <Card.Header>{product.releaseTitle}</Card.Header>

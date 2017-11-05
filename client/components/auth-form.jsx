@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { auth } from '../store';
-import { Button, Form, Grid, Header, Image, Message, Segment } from 'semantic-ui-react'
+import { Button, Form, Grid, Header, Image, Message, Segment, Icon } from 'semantic-ui-react'
 
 /**
  * COMPONENT
@@ -17,7 +17,7 @@ const AuthForm = (props) => {
     <div className="login-form">
       <Grid
         textAlign="center"
-        style={{ height: '100%' }}
+        style={{ height: '450px' }}
         verticalAlign="middle"
       >
         <Grid.Column style={{ maxWidth: 450 }}>
@@ -25,7 +25,7 @@ const AuthForm = (props) => {
             {displayName}
           </Header>
           <Form onSubmit={handleSubmit} name={name} size="large">
-            <Segment stacked>
+            <Segment stacked style={{ height: '225px' }}>
               <Form.Input
                 fluid
                 icon="user"
@@ -44,13 +44,18 @@ const AuthForm = (props) => {
               <Button color="green" fluid size="large">
                 {displayName}
               </Button>
-            </Segment>
-          </Form>
-          <Message>
-            {displayName} with <a href="/auth/google">Google</a>
-            {displayName} with <a href="auth/facebook">Facebook</a>
-
+              <Message href="/auth/google" style={{ top: '24px' }}>
+              <Icon name='google' size='large' />Google {displayName}
+  
+            </Message>
+            <Message href="auth/facebook" style={{ top: '24px' }}>
+            <Icon name='facebook square' size='large' />Facebook {displayName}
+  
           </Message>
+            </Segment>
+
+          </Form>
+
         </Grid.Column>
       </Grid>
     </div>
