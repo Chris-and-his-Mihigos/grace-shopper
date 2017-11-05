@@ -5,7 +5,7 @@ import { addCart, addToCart } from '../store/cart';
 
 const AlbumCard = (props) => {
   const {
-    product, cart, handleSubmit, cartId, user,
+    product, cart, handleSubmit, cartId, user, session,
   } = props;
   return (
     <Card>
@@ -30,7 +30,7 @@ const AlbumCard = (props) => {
         </Card.Description>
       </Card.Content>
       <Card.Content extra>
-        <Button onClick={event => handleSubmit(event, product, cart, cartId, user)}><Icon name="add to cart" />
+        <Button onClick={event => handleSubmit(event, product, cart, cartId, user, session)}><Icon name="add to cart" />
           Add to Cart
         </Button>
       </Card.Content>
@@ -38,20 +38,18 @@ const AlbumCard = (props) => {
   );
 };
 
-const mapState = state => ({ cart: state.cart, cartId: state.cartId, user: state.user });
+const mapState = state => ({ cart: state.cart, cartId: state.cartId, user: state.user, session: state.sessionId });
 const mapDispatch = dispatch => ({
-  handleSubmit(event, product, cart, cartId, user) {
+  handleSubmit(event, product, cart, cartId, user, session) {
     event.preventDefault();
     let item;
     if (!cart.length || cart == [[]]) {
       item = [{ product, qty: 1 }]
     } else { item = [{ product, qty: 1 }, ...cart[0].items] }
-    let sess;
-    if (typeof user === 'string') { sess = user }
 
     const order = {
       items: item,
-      sessionId: sess || null,
+      sessionId: session || null,
       status: 'cart',
       userId: user.id || null,
       cartID: cartId,

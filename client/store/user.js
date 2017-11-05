@@ -7,6 +7,7 @@ import { fetchCart } from './cart';
  */
 const GET_USER = 'GET_USER';
 const REMOVE_USER = 'REMOVE_USER';
+const SET_SESSION = 'SET_SESSION';
 
 /**
  * INITIAL STATE
@@ -18,6 +19,7 @@ const defaultUser = {};
  */
 const getUser = user => ({ type: GET_USER, user });
 const removeUser = () => ({ type: REMOVE_USER });
+const setSess = id => ({ type: SET_SESSION, id })
 
 /**
  * REDUCER
@@ -35,21 +37,29 @@ export default (state = defaultUser, action) => {
   }
 };
 
+export const sessionId = (state = '', action) => {
+  switch (action.type) {
+    case SET_SESSION:
+      return action.id;
+
+    default:
+      return state;
+  }
+}
+
 /**
  * THUNK CREATORS
  */
 export const me = () => (dispatch) => {
   axios.get('/auth/me')
     .then((res) => {
-      dispatch(getUser(res.data || defaultUser))
-      if (res.data) dispatch(fetchCart(res.data))
-      else {
-        axios.get('/auth/sessionId')
-          .then((sess) => {
-            dispatch(getUser(sess.data))
-            dispatch(fetchCart(sess.data))
-          })
-      }
+      const userData = res.data;
+      dispatch(getUser(userData || defaultUser))
+      axios.get('/auth/sessionId')
+        .then((sess) => {
+          dispatch(setSess(sess.data))
+          dispatch(fetchCart(userData || sess.data))
+        })
     })
     .catch(err => console.log(err))
 };
@@ -72,7 +82,7 @@ export const logout = () => (dispatch) => {
     })
     .then(() => axios.get('/auth/sessionId')
       .then((sess) => {
-        dispatch(getUser(sess.data))
+        dispatch(fetchCart(sess.data))
       }))
     .catch(err => console.log(err))
 };

@@ -20,6 +20,7 @@ router.get('/:Id', (req, res, next) => {
     attributes: ['items', 'sessionId', 'status', 'userId', 'id'],
   })
     .then((order) => {
+      req.session.cart = order;
       res.json(order);
     })
     .catch(next);
