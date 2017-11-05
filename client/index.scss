@@ -128,3 +128,16 @@ margin-left: 1em;
 .backgroundcolor {
   background-color: #1b1c1d
 }
+
+#singlealbuminnercontainer {
+  display:flex;
+}
+
+#singlealbumoutercontainer {
+  display:flex;
+  flex-direction: column;
+}
+
+.ui.card {
+  margin-top: 1em;
+}

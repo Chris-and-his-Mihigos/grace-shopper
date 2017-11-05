@@ -46,7 +46,7 @@ const Home = () => (
               className="textoverlay"
               style={{ fontSize: '1.7em', fontWeight: 'normal' }}
             />
-            <Button primary size="huge" className="textoverlay" as={Link} to="/allalbums">
+            <Button color='green' size="huge" className="textoverlay" as={Link} to="/allalbums">
               See Albums
               <Icon name="right arrow" />
             </Button>
