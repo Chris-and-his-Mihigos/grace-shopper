@@ -1,5 +1,6 @@
 import axios from 'axios';
 import history from '../history';
+import { fetchCart } from './cart';
 
 /**
  * ACTION TYPES
@@ -39,7 +40,17 @@ export default (state = defaultUser, action) => {
  */
 export const me = () => (dispatch) => {
   axios.get('/auth/me')
-    .then(res => dispatch(getUser(res.data || defaultUser)))
+    .then((res) => {
+      dispatch(getUser(res.data || defaultUser))
+      if (res.data) dispatch(fetchCart(res.data))
+      else {
+        axios.get('/auth/sessionId')
+          .then((sess) => {
+            dispatch(getUser(sess.data))
+            dispatch(fetchCart(sess.data))
+          })
+      }
+    })
     .catch(err => console.log(err))
 };
 
@@ -47,6 +58,7 @@ export const auth = (email, password, method) => (dispatch) => {
   axios.post(`/auth/${method}`, { email, password })
     .then((res) => {
       dispatch(getUser(res.data))
+      dispatch(fetchCart(res.data))
       history.push('/home')
     })
     .catch(error => dispatch(getUser({ error })))
@@ -58,5 +70,9 @@ export const logout = () => (dispatch) => {
       dispatch(removeUser())
       history.push('/login')
     })
+    .then(() => axios.get('/auth/sessionId')
+      .then((sess) => {
+        dispatch(getUser(sess.data))
+      }))
     .catch(err => console.log(err))
 };

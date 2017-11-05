@@ -1,11 +1,11 @@
 import React from 'react';
 import { Card, Icon, Image, Button } from 'semantic-ui-react';
 import { connect } from 'react-redux';
-import { addCart, updateCart } from '../store/cart';
+import { addCart, addToCart } from '../store/cart';
 
 const AlbumCard = (props) => {
   const {
-    product, cart, handleSubmit, cartId,
+    product, cart, handleSubmit, cartId, user,
   } = props;
   return (
     <Card>
@@ -30,7 +30,7 @@ const AlbumCard = (props) => {
         </Card.Description>
       </Card.Content>
       <Card.Content extra>
-        <Button onClick={event => handleSubmit(event, product, cart, cartId)}><Icon name="add to cart" />
+        <Button onClick={event => handleSubmit(event, product, cart, cartId, user)}><Icon name="add to cart" />
           Add to Cart
         </Button>
       </Card.Content>
@@ -38,22 +38,25 @@ const AlbumCard = (props) => {
   );
 };
 
-const mapState = state => ({ cart: state.cart, cartId: state.cartId });
+const mapState = state => ({ cart: state.cart, cartId: state.cartId, user: state.user });
 const mapDispatch = dispatch => ({
-  handleSubmit(event, product, cart, cartId) {
-    let item;
+  handleSubmit(event, product, cart, cartId, user) {
     event.preventDefault();
-    if (!cart.length) {
+    let item;
+    if (!cart.length || cart == [[]]) {
       item = [{ product, qty: 1 }]
     } else { item = [{ product, qty: 1 }, ...cart[0].items] }
+    let sess;
+    if (typeof user === 'string') { sess = user }
+
     const order = {
       items: item,
-      sessionId: 6994,
+      sessionId: sess || null,
       status: 'cart',
-      userId: 1,
-      cartID: 1,
+      userId: user.id || null,
+      cartID: cartId,
     }
-    if (cart.length) dispatch(updateCart(cartId, order))
+    if (cart.length) dispatch(addToCart(cartId, order))
     else dispatch(addCart(order))
   },
 })
