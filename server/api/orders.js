@@ -18,7 +18,11 @@ router.get('/:id', (req, res, next) => {
 router.post('/', (req, res, next) => {
   console.log('addBody', req.body);
   Order.create(req.body)
-    .then(order => res.status(201).json(order))
+    .then((order) => {
+      console.log(res);
+      res.status(201).cookie('cartId', order.id).json(order)
+      console.log(res);
+    })
     .catch(next);
 });
 

@@ -7,7 +7,7 @@ const session = require('express-session')
 const passport = require('passport')
 const SequelizeStore = require('connect-session-sequelize')(session.Store)
 const db = require('./db')
-const sessionStore = new SequelizeStore({db})
+const sessionStore = new SequelizeStore({ db })
 const PORT = process.env.PORT || 8080
 const app = express()
 const socketio = require('socket.io')
@@ -43,13 +43,20 @@ const createApp = () => {
 
   // session middleware with passport
   app.use(session({
+    name: 'server-session-cookie-id',
     secret: process.env.SESSION_SECRET || 'my best friend is Cody',
     store: sessionStore,
     resave: false,
-    saveUninitialized: false
+    saveUninitialized: false,
+    cartId: null,
   }))
   app.use(passport.initialize())
   app.use(passport.session())
+
+  app.use('/', (req, res, next) => {
+    req.session.sessionId = req.session.id;
+    next();
+  })
 
   // auth and api routes
   app.use('/auth', require('./auth'))

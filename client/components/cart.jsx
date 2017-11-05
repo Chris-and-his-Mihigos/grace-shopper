@@ -15,12 +15,6 @@ import CartItem from './cartitem.jsx';
 const Cart = (props) => {
   const { cart } = props;
   let val = 0;
-  if (cart.length) {
-    cart[0].items.forEach((item) => {
-      val += (item.product.price * item.qty)
-      return val
-    })
-  }
 
   return (
     <div>
@@ -29,7 +23,10 @@ const Cart = (props) => {
       }
       <Title title="Shopping Cart" />
 
-      {
+      { cart.length ? cart[0].items.forEach((item) => {
+      val += (item.product.price * item.qty)
+      return val
+    }) : null
       }
       <div className="itemCardWrapper">
         <div className="cartSectionWrapper">
