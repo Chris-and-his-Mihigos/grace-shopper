@@ -3,7 +3,7 @@ import { Card, Icon, Image, Button, Reveal } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 import { addCart, addToCart } from '../store/cart';
 
-console.log('black');
+
 const AlbumCard = (props) => {
   const {
     product, cart, handleSubmit, cartId, user, session,
