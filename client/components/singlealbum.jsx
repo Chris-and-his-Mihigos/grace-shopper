@@ -67,6 +67,7 @@ const SingleAlbum = (props) => {
 };
 
 const mapState = (state, ownProps) => {
+  console.log('singleAlbum', state)
   const albumId = ownProps.match.params.id;
   const album = state.products.find(product => product.id === +albumId);
   return {

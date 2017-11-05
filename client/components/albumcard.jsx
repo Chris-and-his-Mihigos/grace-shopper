@@ -36,9 +36,9 @@ const AlbumCard = (props) => {
       <Card.Content extra>
         {cart[0] &&
         cart[0].items.filter(item => +item.product.id === product.id).length ? (
-          <Button>
+          <Button color="green" disabled>
             <Icon name="add to cart" />
-            Added to Cart!
+            Already in Cart!
           </Button>
         ) : (
           <Button
