@@ -30,6 +30,7 @@ class Routes extends Component {
             <Route path="/cart" component={Cart} />
             <Route path="/aboutus" component={AboutUs} />
             <Route path="/album/:id" component={SingleAlbum} />
+            <Route exact path="/" component={Home} />
             {isLoggedIn && (
               <Switch>
               {/* Routes placed here are only available after logging in */}
@@ -37,7 +38,6 @@ class Routes extends Component {
               </Switch>
             )}
             {/* Displays our Login component as a fallback */}
-            <Route path="/" component={Home} />
             <Route component={Login} />
           </Switch>
         </Main>

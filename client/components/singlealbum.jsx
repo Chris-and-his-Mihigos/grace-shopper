@@ -49,7 +49,7 @@ const SingleAlbum = (props) => {
               album.users.map(user => (
                 <Table.Row key={user.id}>
                   <Table.Cell>
-                    <Rating icon="star" defaultRating={user.review.rating} maxRating={5} />
+                    <Rating icon="star" defaultRating={user.review.rating} maxRating={5} disabled />
                   </Table.Cell>
                   <Table.Cell>{user.review.text}</Table.Cell>
                 </Table.Row>
