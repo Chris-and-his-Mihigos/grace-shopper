@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { updateID } from './cart';
+import { updateID, clearCart } from './cart';
 
 /* -----------------    ACTION TYPES ------------------ */
 
@@ -56,7 +56,6 @@ export const removeOrder = id => (dispatch) => {
 export const addOrder = order => (dispatch) => {
   axios.post('/api/orders', order)
     .then((res) => {
-      console.log(res);
       dispatch(create(res.data))
       dispatch(updateID(res.data.id))
     })
@@ -67,5 +66,13 @@ export const updateOrder = (id, order) => (dispatch) => {
   axios.put(`/api/orders/${id}`, order)
     .then(res => dispatch(update(res.data)))
     .catch(err => console.error(`Updating order: ${order} unsuccesful`, err));
+};
+
+export const purchaseOrder = (id, shipping, order) => (dispatch) => {
+  axios.put(`/api/orders/${id}`, order)
+    .then(res => dispatch(update(res.data)))
+    .then(() => axios.put(`/api/orders/${id}/shipping`, shipping)
+      .then(() => dispatch(clearCart()))
+      .catch(err => console.error(`Updating order: ${shipping} unsuccesful`, err)))
 };
 

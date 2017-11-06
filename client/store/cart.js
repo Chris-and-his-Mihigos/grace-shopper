@@ -59,7 +59,7 @@ export const cartIDred = (cartID = 0, action) => {
 /* ------------   THUNK CREATORS     ------------------ */
 //QUESTION: Step 4. Fetch cart is run using either the user.Id returned from the /auth/me call or using the session if no user found.
 // Step 5 is in /server/api/cart.
-//Step 6 is then sets the cart and cart id state objects using the data returned from the api call to api/cart. 
+//Step 6 is then sets the cart and cart id state objects using the data returned from the api call to api/cart.
 export const fetchCart = user => (dispatch) => {
   let fetchId;
   if (user.id) fetchId = user.id
