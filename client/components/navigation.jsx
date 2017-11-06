@@ -37,7 +37,9 @@ const Navigation = (props) => {
               {/* The navbar will show these links after you log in */}
               <Button inverted as={Link} onClick={handleClick} to="/login">Log Out</Button>
               <Button inverted as={Link} to="/cart" style={{ marginLeft: '0.5em' }}><Icon name="cart" />Cart</Button>
+
               <Button inverted as={Link} to="/home" style={{ marginLeft: '0.5em' }}><Icon name="user circle outline" />Profile</Button>
+
             </Menu.Item>
           :
             <Menu.Item position="right">
