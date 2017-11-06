@@ -23,7 +23,7 @@ const CartItem = (props) => {
         <Grid.Column>
           <Image
             size="small"
-            src="abbey_road.jpg"
+            src={product.image}
             label={{
               as: 'a',
               size: 'large',

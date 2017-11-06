@@ -14,6 +14,46 @@ const fakeOrders = [];
 const fakeGenres = ['rock', 'jazz', 'hip-hop', 'classical', 'electronic'];
 const fakeLabels = ['Atlantic', 'Blue Note', 'Def Jam', 'Deutsche Grammophon', 'Warp']
 const fakeTags = ['chill', 'upbeat', 'deep', 'funky'];
+const fakeImage = [
+  faker.image.imageUrl(),
+  faker.image.image(),
+  faker.image.abstract(),
+  faker.image.animals(),
+  faker.image.business(),
+  faker.image.cats(),
+  faker.image.city(),
+  faker.image.food(),
+  faker.image.nightlife(),
+  faker.image.fashion(),
+  faker.image.people(),
+  faker.image.nature(),
+  faker.image.sports(),
+  faker.image.technics(),
+  faker.image.transport(),
+]
+const fakeTitle = [
+  "No Discounts",
+  "Five-leaf Clover",
+  "Bursting Bubbles",
+  "Methodical Madness",
+  "All Ears",
+  "Chaos",
+  "Balls to the Wall",
+  "Here We Go",
+  "Once Bitten",
+  "Advantage",
+  "Form Over Function",
+  "Favoritism",
+  "Grains of Salt",
+  "Bare to the Bone",
+  "Badge of Honor",
+  "Forever Alone",
+  "Concept Art",
+  "Last Candidate",
+  "No Justice",
+  "Creative Director",
+]
+
 
 
 // RANDOM INTEGER GENERATOR (INCLUSIVE)
@@ -36,12 +76,12 @@ const releaseTitles = chance.unique(chance.word, 50);
 
 const fakeProductGenerator = () => {
   const product = {
-    releaseTitle: releaseTitles.pop(),
-    artists: [faker.name.firstName() + ' ' + faker.name.lastName()],
+    releaseTitle: fakeTitle[randomInt(0, fakeTitle.length - 1)],
+    artists: [`${faker.name.firstName()  } ${  faker.name.lastName()}`],
     genre: fakeGenres[randomInt(0, 4)],
     releaseYear: randomInt(1920, 2017),
-    imageUrl: faker.image.imageUrl(),
-    songsInfo: [{ title: faker.fake('{{lorem.words}}'), duration: (randomInt(1,9).toString() + ":" + randomInt(0,9).toString() + randomInt(0,9).toString()) }],
+    image: fakeImage[randomInt(0, 14)],
+    songsInfo: [{ title: faker.fake('{{lorem.words}}'), duration: (`${randomInt(1,9).toString()  }:${  randomInt(0,9).toString()  }${randomInt(0,9).toString()}`) }],
     label: fakeLabels[randomInt(0, 4)],
     inventory: randomInt(0, 100),
     price: randomInt(1, 50),
@@ -95,16 +135,13 @@ const seed = () =>
     User.create(user)))
     .then(() =>
       Promise.all(fakeProducts.map(product =>
-        Product.create(product))
-      ))
+        Product.create(product)),))
     .then(() =>
       Promise.all(fakeReviews.map(review =>
-        Review.create(review))
-      ))
+        Review.create(review)),))
     .then(() =>
       Promise.all(fakeOrders.map(order =>
-        Order.create(order))
-      ));
+        Order.create(order)),));
 
 const db = require('../server/db');
 
@@ -115,7 +152,7 @@ const main = () => {
       console.log('Seeding databse...');
       return seed();
     })
-    .catch(err => {
+    .catch((err) => {
       console.log('Error while seeding');
       console.log(err.stack);
     })
