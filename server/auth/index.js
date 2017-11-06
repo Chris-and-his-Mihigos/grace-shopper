@@ -36,10 +36,12 @@ router.post('/logout', (req, res) => {
   res.redirect('/')
 })
 
+//QUESTION: continued question about how we are persisting cart. Step # 2.
 router.get('/me', (req, res) => {
   res.json(req.user);
 })
 
+//QUESTION: continued question about how we are persisting cart. Step # 3.
 router.get('/sessionId', (req, res) => {
   res.json(req.session.sessionId);
 });

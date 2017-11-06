@@ -50,6 +50,11 @@ export const sessionId = (state = '', action) => {
 /**
  * THUNK CREATORS
  */
+
+ //QUESTION. Step 3. The me() function is run, which makes an /auth/me call. (located in /server/auth/index) The user data is returned.
+ // If a user exists, getUser sets the user state data to that user, otherwise, it is set to an empty object.
+ // A call to /auth/sessionId is then made. The returned data(string) is the set to the 
+ //session state object. Then fetchCart is run with either userData or sess.data. Step 4 is in /client/store/cart
 export const me = () => (dispatch) => {
   axios.get('/auth/me')
     .then((res) => {
