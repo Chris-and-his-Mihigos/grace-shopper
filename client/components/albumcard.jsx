@@ -1,9 +1,8 @@
 import React from 'react';
-import { Card, Icon, Image, Button, Reveal } from 'semantic-ui-react';
+import { Card, Icon, Image, Button } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 import { addCart, addToCart } from '../store/cart';
 
-console.log('black');
 const AlbumCard = (props) => {
   const {
     product, cart, handleSubmit, cartId, user, session,
@@ -12,15 +11,13 @@ const AlbumCard = (props) => {
     <Card>
       <a href={`album/${product.id}`}>
         <Image
-          src="https://upload.wikimedia.org/wikipedia/en/5/54/Public_image_ltd_album_cover.jpg"
+          src={product.image}
           label={{
-            as: 'a',
             size: 'large',
             color: 'green',
             content: `$${product.price}.00`,
             icon: 'money',
             ribbon: true,
-            href: `album/${product.id}`,
           }}
         />
       </a>
