@@ -42,7 +42,7 @@ const AboutUs = () => (
               stores, depriving communities across the country of a personal
               relationship with their music outlets, and destroying the
               opportunity to discover a whole world of music beyond what
-              corporate retailers wanted them to see. Amoeba arose out of that
+              corporate retailers wanted them to see. Maximal Records arose out of that
               community of music lovers that wanted a better place for music
               than a corporate chain store -- one with the widest possible
               selection, better service, and more respect for people's ideas and
