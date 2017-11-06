@@ -13,6 +13,13 @@ import {
  */
 export const UserHome = (props) => {
   const { email, orders } = props;
+  const statusObj = {
+    cart: 'SHOULD NOT BE HERE',
+    purchased: 'Created - Order is being processed',
+    shipped: 'Shipped - En Route to Destination',
+    arrived: 'Completed - Package has arrived at the destination',
+    cancelled: 'Cancelled - Order has been cancelled',
+  }
   return (
     <div>
       <Title title={`Welcome, ${email}`} />
@@ -30,6 +37,7 @@ export const UserHome = (props) => {
             {// this is mapping out our order items
             orders.map(order => (
               <Modal
+                key={order.id}
                 trigger={
                   <List.Item key={order.id}>
                     <List.Icon
@@ -38,7 +46,7 @@ export const UserHome = (props) => {
                       verticalAlign="middle"
                     />
                     <List.Content>
-                      <List.Header as="a">{`#${order.id}`}</List.Header>
+                      <List.Header as="a">{`Order #${order.id}`}</List.Header>
                       <List.Description as="a">{`Purchased on ${moment(
                         order.updatedAt
                           .split('T')
@@ -69,16 +77,20 @@ export const UserHome = (props) => {
                     </Header>
                     { order.items.map(item =>
                      (
-                       <div>
+                       <div key={item.product.id}>
                          <p>
-                           Release Title: {item.releaseTitle}
-                         </p>
-                         <p>
-                           Item Price: {item.price}
-                         </p>
+                           <a href={`/album/${item.product.id}`}>Release Title: {item.product.releaseTitle} </a><br />
+                           Item Price: {item.product.price} <br />
+                         Quantity: {item.qty} <br />
+                       </p>
                          <br />
                          <br />
                        </div>))}
+                       <p>Order Status: {statusObj[order.status]}</p>
+                       <p>Subtotal: {order.items.map(item => item.product.price * item.qty).reduce((subTotal, albumTotal)=> subTotal + albumTotal, 0)} </p>
+                       <p>Tax: {order.items.map(item => item.product.price * item.qty).reduce((subTotal, albumTotal)=> subTotal + albumTotal, 0) * 0.08} </p>
+                       <p>Total: {order.items.map(item => item.product.price * item.qty).reduce((subTotal, albumTotal)=> subTotal + albumTotal, 0) * 1.08} </p>
+                       
                   </Modal.Description>
                 </Modal.Content>
               </Modal>
@@ -97,9 +109,10 @@ const mapState = (state) => {
   const myId = state.user.id;
   const { orders } = state;
   const userOrders = orders.filter(order => +order.userId === myId);
+  const actualOrders = userOrders.filter(order => order.status !== 'cart')
   return {
     email: state.user.email,
-    orders: userOrders,
+    orders: actualOrders,
   };
 };
 
