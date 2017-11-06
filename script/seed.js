@@ -76,7 +76,8 @@ const releaseTitles = chance.unique(chance.word, 50);
 
 const fakeProductGenerator = () => {
   const product = {
-    releaseTitle: fakeTitle[randomInt(0, fakeTitle.length - 1)],
+    // releaseTitle: fakeTitle[randomInt(0, fakeTitle.length - 1)],
+    releaseTitle: releaseTitles.pop(),
     artists: [`${faker.name.firstName()  } ${  faker.name.lastName()}`],
     genre: fakeGenres[randomInt(0, 4)],
     releaseYear: randomInt(1920, 2017),
