@@ -53,6 +53,10 @@ const createApp = () => {
   app.use(passport.initialize())
   app.use(passport.session())
 
+//QUESTION: Ben this is the start of the implimentation of our persistant cart. It steps through mulitple files and parts
+//of the application.I am not sure if this is a decent way to impliment the functionality at all. Basically, I am adding both
+//a sessionId and a cart field to my Session model as part of express-session. Most of the persistant logic actually takes place
+// through an API call though. Ea. Step I will talk about what it does.
   app.use('/', (req, res, next) => {
     req.session.sessionId = req.session.id;
     next();

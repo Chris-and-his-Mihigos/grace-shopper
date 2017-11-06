@@ -11,6 +11,8 @@ import { me, fetchOrders, fetchProducts } from './store';
 /**
  * COMPONENT
  */
+
+ //QUESTION: Step #2. Persistant cart front end logic: The call to me() in user store starts here. Step 3 is in /store/user
 class Routes extends Component {
   componentDidMount() {
     this.props.loadInitialData();
