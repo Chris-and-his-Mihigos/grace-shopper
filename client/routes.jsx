@@ -29,12 +29,12 @@ class Routes extends Component {
             <Route path="/allalbums" component={AllAlbums} />
             <Route path="/cart" component={Cart} />
             <Route path="/aboutus" component={AboutUs} />
-            <Route path="/album/:id" component={SingleAlbum}/>            
-            <Route path="/" component={Home} />
+            <Route path="/album/:id" component={SingleAlbum} />
+            <Route exact path="/" component={Home} />
             {isLoggedIn && (
               <Switch>
-                {/* Routes placed here are only available after logging in */}
-                <Route path="/home" component={UserHome} />
+              {/* Routes placed here are only available after logging in */}
+              <Route path="/home" component={UserHome} />
               </Switch>
             )}
             {/* Displays our Login component as a fallback */}

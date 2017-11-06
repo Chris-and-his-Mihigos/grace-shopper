@@ -40,7 +40,7 @@ const fakeProductGenerator = () => {
     artists: [faker.name.firstName() + ' ' + faker.name.lastName()],
     genre: fakeGenres[randomInt(0, 4)],
     releaseYear: randomInt(1920, 2017),
-    imageUrl: faker.internet.url(),
+    imageUrl: faker.image.imageUrl(),
     songsInfo: [{ title: faker.fake('{{lorem.words}}'), duration: (randomInt(1,9).toString() + ":" + randomInt(0,9).toString() + randomInt(0,9).toString()) }],
     label: fakeLabels[randomInt(0, 4)],
     inventory: randomInt(0, 100),

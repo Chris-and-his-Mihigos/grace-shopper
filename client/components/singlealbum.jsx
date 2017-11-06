@@ -1,10 +1,5 @@
 import React from 'react';
 import {
-  Card,
-  Icon,
-  Image,
-  Button,
-  Grid,
   Table,
   Rating,
 } from 'semantic-ui-react';
@@ -31,7 +26,7 @@ const SingleAlbum = (props) => {
           <Table.Body>
             {album &&
               album.songsInfo.map((song, index) => (
-                <Table.Row>
+                <Table.Row key={song.title}>
                   <Table.Cell>{index}</Table.Cell>
                   <Table.Cell>{song.title}</Table.Cell>
                   <Table.Cell>{song.duration}</Table.Cell>
@@ -52,9 +47,9 @@ const SingleAlbum = (props) => {
           <Table.Body>
             {album &&
               album.users.map(user => (
-                <Table.Row>
+                <Table.Row key={user.id}>
                   <Table.Cell>
-                    <Rating icon="star" defaultRating={user.review.rating} maxRating={5} />
+                    <Rating icon="star" defaultRating={user.review.rating} maxRating={5} disabled />
                   </Table.Cell>
                   <Table.Cell>{user.review.text}</Table.Cell>
                 </Table.Row>
