@@ -59,14 +59,14 @@ const mapDispatch = dispatch => ({
   },
   handleChange(event, id, cart, cartId, data) {
     event.preventDefault();
-    const order = Object.assign({}, cart)
-    order.items.forEach((item) => {
+    const order = Object.assign({}, cart[0])
+    order[0].items.forEach((item) => {
       if (item.product.id === id) {
         item.qty = data.value;
       }
     })
     dispatch(updateCart(cartId, order))
-  }
+  },
 })
 
 export default connect(mapState, mapDispatch)(CartItem);
