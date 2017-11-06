@@ -8,13 +8,16 @@ const CREATE_CART = 'CREATE_CART';
 const REMOVE_CART = 'REMOVE_CART';
 const UPDATE_CART = 'UPDATE_CART';
 const CART_ID = 'CART_ID';
+const CLEAR_CART = 'CLEAR_CART';
+
 /* ------------   ACTION CREATORS     ------------------ */
 
 const fetch = cart => ({ type: FETCH_CARTS, cart });
 const create = cart => ({ type: CREATE_CART, cart });
 const remove = id => ({ type: REMOVE_CART, id });
 const update = cart => ({ type: UPDATE_CART, cart });
-const cartId = id => ({ type: CART_ID, id })
+const cartId = id => ({ type: CART_ID, id });
+const clear = () => ({ type: CLEAR_CART });
 /* ------------       REDUCER     ------------------ */
 
 
@@ -33,6 +36,9 @@ export const cart = (carts = [], action) => {
       return carts.map(cart => (
         action.cart.id === cart.id ? action.cart : cart
       ));
+
+    case CLEAR_CART:
+      return [];
 
     default:
       return carts;
@@ -88,4 +94,9 @@ export const updateCart = (id, cart) => (dispatch) => {
 
 export const updateID = id => (dispatch) => {
   dispatch(cartId(id))
+}
+
+export const clearCart = () => (dispatch) => {
+  dispatch(clear())
+  dispatch(cartId(0))
 }
