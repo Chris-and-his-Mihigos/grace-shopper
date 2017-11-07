@@ -1,7 +1,7 @@
 import axios from 'axios';
 import history from '../history';
 import { fetchCart } from './cart';
-import { addError } from './error';
+import { add as addError } from './error';
 
 /**
  * ACTION TYPES
@@ -82,7 +82,6 @@ export const auth = (email, password, method) => (dispatch) => {
     })
     .catch((err) => {
       dispatch(addError(err.response.statusText))
-      dispatch(getUser({ err }))
     })
 };
 
@@ -98,6 +97,5 @@ export const logout = () => (dispatch) => {
       }))
     .catch((err) => {
       dispatch(addError(err.response.statusText))
-      console.log(err)
     })
 };

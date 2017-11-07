@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { addError } from './error';
+import { add as addError } from './error';
 
 /**
  * ACTION TYPES
