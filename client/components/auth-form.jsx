@@ -1,8 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { auth } from '../store';
 import { Button, Form, Grid, Header, Image, Message, Segment, Icon } from 'semantic-ui-react'
+import { auth } from '../store';
 
 /**
  * COMPONENT
@@ -47,11 +47,11 @@ const AuthForm = (props) => {
                 {displayName}
               </Button>
               <Message href="/auth/google" style={{ top: '24px' }}>
-                <Icon name='google' size='large' />Google {displayName}
+                <Icon name="google" size="large" />Google {displayName}
 
               </Message>
               <Message href="auth/facebook" style={{ top: '24px' }}>
-                <Icon name='facebook square' size='large' />Facebook {displayName}
+                <Icon name="facebook square" size="large" />Facebook {displayName}
 
               </Message>
             </Segment>

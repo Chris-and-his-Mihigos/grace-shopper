@@ -3,17 +3,16 @@ import { Card, Icon, Image, Button } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 import { addCart, addToCart } from '../store/cart';
 
-const AlbumCard = (props) => {
+const AdminAlbumCard = (props) => {
   const {
     product, cart, handleSubmit, cartId, user, session, isAdmin
   } = props;
-  let redirect;
-  if (isAdmin) {
-    redirect = `admin/album/${product.id}`;
-  } else { redirect = `/album/${product.id}` }
   return (
-    <Card>
-      <a href={redirect}>
+    <Card style={{ margin: 'inherit' }}>
+
+      <a href={`admin/album/${product.id}`}>
+
+
         <Image
           src={product.image}
           label={{
@@ -84,4 +83,4 @@ const mapDispatch = dispatch => ({
   },
 });
 
-export default connect(mapState, mapDispatch)(AlbumCard);
+export default connect(mapState, mapDispatch)(AdminAlbumCard);

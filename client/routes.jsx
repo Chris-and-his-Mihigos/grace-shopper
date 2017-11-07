@@ -15,9 +15,9 @@ import {
   AboutUs,
   SingleAlbum,
   AdminOrders,
-  AdminProducts,
   AdminUsers,
 } from './components';
+import AdminEditProduct from './components/admineditproduct.jsx'
 // import ProductListing from './components/productlisting'
 import { me, fetchOrders, fetchProducts, fetchReviews } from './store';
 
@@ -52,7 +52,7 @@ class Routes extends Component {
                 <Route path="/home" component={UserHome} />
                 {isAdmin && (
                 <Switch><Route path="/admin/users" component={AdminUsers} />
-                  <Route path="/admin/products" component={AdminProducts} />
+                  <Route path="/admin/album/:id" component={AdminEditProduct} />
                   <Route path="/admin/orders" component={AdminOrders} />
                 </Switch>
               )}

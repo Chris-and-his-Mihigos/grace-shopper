@@ -40,10 +40,7 @@ export default (reviews = [], action) => {
 
 export const fetchReviews = albumId => (dispatch) => {
   axios.get(`/api/reviews/${albumId}`)
-    .then((res) => {
-      console.log('STORE REVIEWS', res.data)
-      return dispatch(fetchR(res.data))
-    });
+    .then(res => dispatch(fetchR(res.data)));
 };
 
 // optimistic
