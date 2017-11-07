@@ -1,5 +1,6 @@
 import axios from 'axios';
-import { updateID } from './cart';
+import { updateID, clearCart } from './cart';
+import { add as addError } from './error';
 
 /* -----------------    ACTION TYPES ------------------ */
 
@@ -40,32 +41,54 @@ export default (orders = [], action) => {
   }
 };
 /* ------------   THUNK CREATORS     ------------------ */
-
 export const fetchOrders = () => (dispatch) => {
   axios.get('/api/orders')
-    .then(res => dispatch(fetch(res.data)));
+    .then(res => dispatch(fetch(res.data)))
+    .catch(err => dispatch(addError(err.response.statusText)));
 };
 
 // optimistic
 export const removeOrder = id => (dispatch) => {
   dispatch(remove(id));
   axios.delete(`/api/orders/${id}`)
-    .catch(err => console.error(`Removing order: ${id} unsuccesful`, err));
+    .catch((err) => {
+      dispatch(addError(err.response.statusText))
+      console.error(`Removing order: ${id} unsuccesful`, err)
+    });
 };
 
 export const addOrder = order => (dispatch) => {
   axios.post('/api/orders', order)
     .then((res) => {
-      console.log(res);
       dispatch(create(res.data))
       dispatch(updateID(res.data.id))
     })
-    .catch(err => console.error(`Creating order: ${order} unsuccesful`, err));
+    .catch((err) => {
+      dispatch(addError(err.response.statusText))
+      console.error(`Creating order: ${order} unsuccesful`, err)
+    });
 };
 
 export const updateOrder = (id, order) => (dispatch) => {
   axios.put(`/api/orders/${id}`, order)
-    .then(res => dispatch(update(res.data)))
-    .catch(err => console.error(`Updating order: ${order} unsuccesful`, err));
+    .then((res) => {
+      dispatch(update(res.data))
+    })
+    .catch((err) => {
+      dispatch(addError(err.response.statusText))
+      console.error(`Updating order: ${order} unsuccesful`, err)
+    });
 };
 
+export const purchaseOrder = (id, shipping, order) => (dispatch) => {
+  axios.put(`/api/orders/${id}`, order)
+    .then((res) => {
+      dispatch(update(res.data))
+    })
+    .then(() => axios.put(`/api/orders/${id}/shipping`, shipping))
+    .then(() => dispatch(clearCart()))
+    .catch((err) => {
+      dispatch(addError(err.response.statusText))
+      console.error(`Updating order: ${shipping} unsuccesful`, err)
+    });
+};

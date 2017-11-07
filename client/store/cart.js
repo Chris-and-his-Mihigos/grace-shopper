@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { addOrder, updateOrder } from './orders';
+import { add as addError } from './error';
 
 /* -----------------    ACTION TYPES ------------------ */
 
@@ -59,7 +60,7 @@ export const cartIDred = (cartID = 0, action) => {
 /* ------------   THUNK CREATORS     ------------------ */
 //QUESTION: Step 4. Fetch cart is run using either the user.Id returned from the /auth/me call or using the session if no user found.
 // Step 5 is in /server/api/cart.
-//Step 6 is then sets the cart and cart id state objects using the data returned from the api call to api/cart. 
+//Step 6 is then sets the cart and cart id state objects using the data returned from the api call to api/cart.
 export const fetchCart = user => (dispatch) => {
   let fetchId;
   if (user.id) fetchId = user.id
@@ -70,6 +71,10 @@ export const fetchCart = user => (dispatch) => {
         dispatch(fetch(res.data[0]))
         dispatch(cartId(res.data[0].id))
       }
+    })
+    .catch((err) => {
+      dispatch(addError(err))
+      console.error('Unsucessful')
     });
 };
 
