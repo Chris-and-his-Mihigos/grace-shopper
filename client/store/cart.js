@@ -74,7 +74,7 @@ export const fetchCart = user => (dispatch) => {
     })
     .catch((err) => {
       dispatch(addError(err))
-      console.error('Unsucessful')
+      console.error('Unsuccessful')
     });
 };
 

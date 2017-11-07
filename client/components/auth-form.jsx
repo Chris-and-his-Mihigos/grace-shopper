@@ -74,7 +74,7 @@ const AuthForm = (props) => {
 const mapLogin = state => ({
   name: 'login',
   displayName: 'Login',
-  error: state.user.error,
+  error: state.user.err,
 });
 
 const mapSignup = state => ({

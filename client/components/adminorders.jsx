@@ -3,7 +3,7 @@ import moment from 'moment';
 import { connect } from 'react-redux';
 import { List, Modal, Header, Select } from 'semantic-ui-react';
 import Title from './title.jsx';
-import { adminUpdateOrder } from '../store/admin/orders';
+import { adminUpdateOrder } from '../store/orders';
 
 /**
  * COMPONENT
@@ -164,7 +164,6 @@ class AdminOrders extends React.Component {
                                     text: 'Cancelled - Order has been cancelled',
                                   },
                                 ]}
-                                // onChange={console.log('update some shit')}
                               />
                             </Modal.Description>
                           </Modal.Content>

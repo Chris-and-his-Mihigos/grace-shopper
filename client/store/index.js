@@ -8,12 +8,10 @@ import products from './products';
 import reviews from './reviews';
 import { cart, cartIDred as cartId } from './cart';
 import error from './error';
-import adminOrders from './admin/orders';
-import adminProducts from './admin/products';
-import adminUsers from './admin/users';
+import users from './users';
 
 const reducer = combineReducers({
-  user, orders, products, cart, reviews, cartId, sessionId, error, adminOrders, adminProducts, adminUsers,
+  user, orders, products, cart, reviews, cartId, sessionId, error, users,
 });
 
 const middleware = composeWithDevTools(applyMiddleware(
@@ -33,6 +31,4 @@ export * from './reviews';
 export * from './error';
 export * from './cart';
 
-export * from './admin/orders';
-export * from './admin/products';
-export * from './admin/users';
+export * from './users';
