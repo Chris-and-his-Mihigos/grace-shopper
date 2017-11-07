@@ -20,16 +20,16 @@ router.post('/', (req, res, next) => {
     .catch(next);
 });
 
-router.put('/:usersId', (req, res, next) => {
-  User.findById(req.params.usersId)
-    .then(user => user.update(req.body))
-    .then(user => res.status(201).send(user))
-    .catch(next);
-});
+// router.put('/:usersId', (req, res, next) => {
+//   User.findById(req.params.usersId)
+//     .then(user => user.update(req.body))
+//     .then(user => res.status(201).send(user))
+//     .catch(next);
+// });
 
-router.delete('/:userId', (req, res, next) => {
-  User.findById(req.params.userId)
-    .then(user => user.destroy())
-    .then(() => res.status(204).end())
-    .catch(next);
-});
+// router.delete('/:userId', (req, res, next) => {
+//   User.findById(req.params.userId)
+//     .then(user => user.destroy())
+//     .then(() => res.status(204).end())
+//     .catch(next);
+// });
