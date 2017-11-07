@@ -20,6 +20,7 @@ router.post('/login', (req, res, next) => {
 router.post('/signup', (req, res, next) => {
   return User.create(req.body)
     .then((user) => {
+      console.log('signingup', user)
       req.login(user, err => (err ? next(err) : res.json(user)))
     })
     .catch((err) => {

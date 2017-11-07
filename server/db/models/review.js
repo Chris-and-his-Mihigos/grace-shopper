@@ -11,7 +11,7 @@ const Review = db.define('review', {
     type: Sequelize.TEXT,
     defaultValue: 'This is the best album in the whole wide world',
     validate: {
-      len: [0, 300],
+      len: [20, 300],
     },
 
   },
