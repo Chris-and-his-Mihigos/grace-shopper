@@ -6,6 +6,7 @@ import {
   Icon,
   Segment,
   Divider,
+  Dropdown,
 } from 'semantic-ui-react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
@@ -14,7 +15,9 @@ import { logout } from '../store/user'
 
 
 const Navigation = (props) => {
-  const { handleClick, isLoggedIn, LogOut } = props
+  const {
+    handleClick, isLoggedIn, LogOut, isAdmin,
+  } = props
 
   return (
 
@@ -35,11 +38,24 @@ const Navigation = (props) => {
           ?
             <Menu.Item position="right">
               {/* The navbar will show these links after you log in */}
+              {
+                isAdmin &&
+                <Menu inverted vertical>
+                  <Dropdown item inverted text="Admin Controls">
+                    <Dropdown.Menu>
+                      <Dropdown.Item as={Link} to="/admin/users">User Management</Dropdown.Item>
+                      <Dropdown.Item as={Link} to="/admin/products">Product Management</Dropdown.Item>
+                      <Dropdown.Item as={Link} to="/admin/orders">Order Management</Dropdown.Item>
+                    </Dropdown.Menu>
+                  </Dropdown>
+                </Menu>
+
+              }
               <Button inverted as={Link} onClick={handleClick} to="/login">Log Out</Button>
               <Button inverted as={Link} to="/cart" style={{ marginLeft: '0.5em' }}><Icon name="cart" />Cart</Button>
 
               <Button inverted as={Link} to="/home" style={{ marginLeft: '0.5em' }}><Icon name="user circle outline" />Profile</Button>
-
+           
             </Menu.Item>
           :
             <Menu.Item position="right">
@@ -59,6 +75,7 @@ const Navigation = (props) => {
 
 const mapState = state => ({
   isLoggedIn: !!state.user.id,
+  isAdmin: !!state.user.id && state.user.isAdmin,
 })
 
 const mapDispatch = dispatch => ({
