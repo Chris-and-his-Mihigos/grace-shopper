@@ -5,6 +5,7 @@ import { withRouter, Link } from 'react-router-dom'
 import { logout } from '../store'
 import Navigation from './navigation.jsx'
 import Footer from './footer.jsx'
+import ErrorModal from './error.jsx';
 
 /**
  * COMPONENT
@@ -13,11 +14,12 @@ import Footer from './footer.jsx'
  *  rendered out by the component's `children`.
  */
 const Main = (props) => {
-  const { children } = props
+  const { children, error } = props
 
   return (
     <div>
       <Navigation />
+      {error !== null ? <ErrorModal error={error} /> : <div />}
       {children}
       <Footer />
     </div>
@@ -29,6 +31,7 @@ const Main = (props) => {
  */
 const mapState = state => ({
   isLoggedIn: !!state.user.id,
+  error: state.error,
 })
 
 const mapDispatch = dispatch => ({

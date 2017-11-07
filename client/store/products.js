@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { addError } from './error';
 
 /* -----------------    ACTION TYPES ------------------ */
 
@@ -40,24 +41,34 @@ export default (products = [], action) => {
 
 export const fetchProducts = () => (dispatch) => {
   axios.get('/api/products')
-    .then(res => dispatch(fetch(res.data)));
+    .then(res => dispatch(fetch(res.data)))
+    .catch(err => dispatch(addError(err.response.statusText)));
 };
 
 // optimistic
 export const removeProduct = id => (dispatch) => {
   dispatch(remove(id));
   axios.delete(`/api/products/${id}`)
-    .catch(err => console.error(`Removing product: ${id} unsuccesful`, err));
+    .catch((err) => {
+      dispatch(addError(err.response.statusText));
+      console.error(`Removing product: ${id} unsuccesful`, err)
+    });
 };
 
 export const addProduct = product => (dispatch) => {
   axios.post('/api/products', product)
     .then(res => dispatch(create(res.data)))
-    .catch(err => console.error(`Creating user: ${product} unsuccesful`, err));
+    .catch((err) => {
+      dispatch(addError(err.response.statusText))
+      console.error(`Creating product: ${product} unsuccesful`, err)
+    });
 };
 
 export const updateProduct = (id, product) => (dispatch) => {
   axios.put(`/api/products/${id}`, product)
     .then(res => dispatch(update(res.data)))
-    .catch(err => console.error(`Updating product: ${product} unsuccesful`, err));
+    .catch((err) => {
+      dispatch(addError(err.response.statusText))
+      console.error(`Updating product: ${product} unsuccesful`, err)
+    });
 };
