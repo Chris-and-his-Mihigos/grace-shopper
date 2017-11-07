@@ -13,7 +13,7 @@ import {
 } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 import history from '../history.js';
-import { addCart, updateCart, fetchReviews, removeReview, adminUpdateProduct, adminRemoveProduct } from '../store';
+import { addCart, updateCart, fetchReviews, removeReview, adminUpdateProduct, adminRemoveProduct, fetchProducts } from '../store';
 import AdminAlbumCard from './adminalbumcard.jsx';
 import ProductReview from './productreview.jsx';
 
@@ -176,6 +176,7 @@ const mapDispatch = dispatch => ({
   },
   deleteAlbum: (albumId) => {
     dispatch(adminRemoveProduct(albumId))
+    dispatch(fetchProducts())
   },
 });
 export default connect(mapState, mapDispatch)(AdminEditProduct);
