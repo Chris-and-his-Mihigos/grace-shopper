@@ -17,3 +17,6 @@ export { default as AboutUs } from './aboutus.jsx'
 export { default as CartPricing } from './cartpricing.jsx'
 export { default as SingleAlbum } from './singlealbum.jsx'
 export { default as ErrorModal } from './error.jsx';
+export { default as AdminOrders } from './adminorders.jsx';
+export { default as AdminUsers } from './adminusers.jsx';
+export { default as AdminProducts } from './adminproducts.jsx';
