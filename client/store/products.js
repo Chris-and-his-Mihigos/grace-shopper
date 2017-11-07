@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { addError } from './error';
+import { add as addError } from './error';
 
 /* -----------------    ACTION TYPES ------------------ */
 
@@ -45,10 +45,10 @@ export const fetchProducts = () => (dispatch) => {
     .catch(err => dispatch(addError(err.response.statusText)));
 };
 
-// optimistic
+// ADMIN
 export const removeProduct = id => (dispatch) => {
   dispatch(remove(id));
-  axios.delete(`/api/products/${id}`)
+  axios.delete(`/api/admin/products/${id}`)
     .catch((err) => {
       dispatch(addError(err.response.statusText));
       console.error(`Removing product: ${id} unsuccesful`, err)
@@ -56,7 +56,7 @@ export const removeProduct = id => (dispatch) => {
 };
 
 export const addProduct = product => (dispatch) => {
-  axios.post('/api/products', product)
+  axios.post('/api/admin/products', product)
     .then(res => dispatch(create(res.data)))
     .catch((err) => {
       dispatch(addError(err.response.statusText))
@@ -65,7 +65,7 @@ export const addProduct = product => (dispatch) => {
 };
 
 export const updateProduct = (id, product) => (dispatch) => {
-  axios.put(`/api/products/${id}`, product)
+  axios.put(`/api/admin/products/${id}`, product)
     .then(res => dispatch(update(res.data)))
     .catch((err) => {
       dispatch(addError(err.response.statusText))
