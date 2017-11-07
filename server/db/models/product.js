@@ -5,7 +5,6 @@ const Product = db.define('product', {
   releaseTitle: {
     type: Sequelize.STRING,
     allowNull: false,
-    unique: true,
     validate: {
     }
   },
