@@ -24,7 +24,7 @@ const updateUser = user => ({ type: ADMIN_UPDATE_USER, user });
 export default (users = [], action) => {
   switch (action.type) {
     case ADMIN_FETCH_USERS:
-      return [action.users, ...users];
+      return action.users;
 
     case ADMIN_DELETE_USER:
       return users.filter(user => user.id !== action.id);
