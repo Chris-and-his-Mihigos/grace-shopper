@@ -116,6 +116,11 @@ const mapState = (state, ownProps) => ({
 const mapDispatch = dispatch => ({
   handleSubmit(event, cartId, cart) {
     event.preventDefault();
+    let errorStart;
+    if (event.target.Street.value === 'error') {
+      errorStart = 'error';
+      console.log(errorStart);
+    }
     const shipping = {
       address: event.target.Street.value,
       city: event.target.City.value,

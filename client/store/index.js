@@ -6,8 +6,9 @@ import user, { sessionId } from './user';
 import orders from './orders';
 import products from './products';
 import { cart, cartIDred as cartId } from './cart';
+import error from './error';
 
-const reducer = combineReducers({ user, orders, products, cart, cartId, sessionId });
+const reducer = combineReducers({ user, orders, products, cart, cartId, sessionId, error });
 const middleware = composeWithDevTools(applyMiddleware(
   thunkMiddleware,
   createLogger({ collapsed: true }),
@@ -18,3 +19,5 @@ export default store;
 export * from './user';
 export * from './orders';
 export * from './products';
+export * from './error';
+export * from './cart';

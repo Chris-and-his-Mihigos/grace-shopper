@@ -1,6 +1,7 @@
 import axios from 'axios';
 import history from '../history';
 import { fetchCart } from './cart';
+import { addError } from './error';
 
 /**
  * ACTION TYPES
@@ -51,10 +52,10 @@ export const sessionId = (state = '', action) => {
  * THUNK CREATORS
  */
 
- //QUESTION. Step 3. The me() function is run, which makes an /auth/me call. (located in /server/auth/index) The user data is returned.
- // If a user exists, getUser sets the user state data to that user, otherwise, it is set to an empty object.
- // A call to /auth/sessionId is then made. The returned data(string) is the set to the 
- //session state object. Then fetchCart is run with either userData or sess.data. Step 4 is in /client/store/cart
+// QUESTION. Step 3. The me() function is run, which makes an /auth/me call. (located in /server/auth/index) The user data is returned.
+// If a user exists, getUser sets the user state data to that user, otherwise, it is set to an empty object.
+// A call to /auth/sessionId is then made. The returned data(string) is the set to the
+// session state object. Then fetchCart is run with either userData or sess.data. Step 4 is in /client/store/cart
 export const me = () => (dispatch) => {
   axios.get('/auth/me')
     .then((res) => {
@@ -66,7 +67,10 @@ export const me = () => (dispatch) => {
           dispatch(fetchCart(userData || sess.data))
         })
     })
-    .catch(err => console.log(err))
+    .catch((err) => {
+      dispatch(addError(err.response.statusText))
+      console.log(err)
+    })
 };
 
 export const auth = (email, password, method) => (dispatch) => {
@@ -76,7 +80,10 @@ export const auth = (email, password, method) => (dispatch) => {
       dispatch(fetchCart(res.data))
       history.push('/home')
     })
-    .catch(error => dispatch(getUser({ error })))
+    .catch((err) => {
+      dispatch(addError(err.response.statusText))
+      dispatch(getUser({ err }))
+    })
 };
 
 export const logout = () => (dispatch) => {
@@ -89,5 +96,8 @@ export const logout = () => (dispatch) => {
       .then((sess) => {
         dispatch(fetchCart(sess.data))
       }))
-    .catch(err => console.log(err))
+    .catch((err) => {
+      dispatch(addError(err.response.statusText))
+      console.log(err)
+    })
 };

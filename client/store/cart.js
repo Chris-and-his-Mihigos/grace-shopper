@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { addOrder, updateOrder } from './orders';
+import { add as addError } from './error';
 
 /* -----------------    ACTION TYPES ------------------ */
 
@@ -70,6 +71,10 @@ export const fetchCart = user => (dispatch) => {
         dispatch(fetch(res.data[0]))
         dispatch(cartId(res.data[0].id))
       }
+    })
+    .catch((err) => {
+      dispatch(addError(err))
+      console.error('Unsucessful')
     });
 };
 
