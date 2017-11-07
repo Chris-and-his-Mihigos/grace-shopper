@@ -9,7 +9,7 @@ import { Button, Form, Grid, Header, Image, Message, Segment, Icon } from 'seman
  */
 const AuthForm = (props) => {
   const {
-    name, displayName, handleSubmit, error,
+    name, displayName, error, handleSubmit,
   } = props;
 
   return (
@@ -24,7 +24,7 @@ const AuthForm = (props) => {
           <Header as="h2" color="green" textAlign="center">
             {displayName}
           </Header>
-          <Form onSubmit={handleSubmit} name={name} size="large">
+          <Form onSubmit={evt => handleSubmit(name, evt)} name={name} size="large">
             <Segment stacked style={{ height: '225px' }}>
               <Form.Input
                 fluid
@@ -32,6 +32,7 @@ const AuthForm = (props) => {
                 iconPosition="left"
                 placeholder="E-mail address"
                 type="text"
+                name="email"
               />
               <Form.Input
                 fluid
@@ -39,19 +40,20 @@ const AuthForm = (props) => {
                 iconPosition="left"
                 placeholder="Password"
                 type="password"
+                name="pass"
               />
 
               <Button color="green" fluid size="large">
                 {displayName}
               </Button>
               <Message href="/auth/google" style={{ top: '24px' }}>
-              <Icon name='google' size='large' />Google {displayName}
-  
-            </Message>
-            <Message href="auth/facebook" style={{ top: '24px' }}>
-            <Icon name='facebook square' size='large' />Facebook {displayName}
-  
-          </Message>
+                <Icon name='google' size='large' />Google {displayName}
+
+              </Message>
+              <Message href="auth/facebook" style={{ top: '24px' }}>
+                <Icon name='facebook square' size='large' />Facebook {displayName}
+
+              </Message>
             </Segment>
 
           </Form>
@@ -81,15 +83,15 @@ const mapSignup = state => ({
   error: state.user.error,
 });
 
-const mapDispatch = (dispatch) => {
-  const handleSubmit = (evt) => {
+const mapDispatch = dispatch => ({
+  handleSubmit: (name, evt) => {
     evt.preventDefault();
-    const formName = evt.target.name;
+    const formName = name;
     const email = evt.target.email.value;
-    const password = evt.target.password.value;
+    const password = evt.target.pass.value;
     dispatch(auth(email, password, formName));
-  };
-};
+  },
+});
 
 export const Login = connect(mapLogin, mapDispatch)(AuthForm);
 export const Signup = connect(mapSignup, mapDispatch)(AuthForm);
@@ -102,4 +104,4 @@ AuthForm.propTypes = {
   displayName: PropTypes.string.isRequired,
   handleSubmit: PropTypes.func.isRequired,
   error: PropTypes.object,
-};
+}

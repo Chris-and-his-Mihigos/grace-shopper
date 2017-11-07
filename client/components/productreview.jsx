@@ -30,13 +30,9 @@ class ProductReview extends Component {
   }
   handleTextChange(e) {
     this.setState({ text: e.target.value })
-    console.log('event target', e.target.value)
-    console.log(this.state.text)
   }
   handleRatingChange(e, data) {
     this.setState({ rating: data.rating })
-    console.log('data', data.rating)
-    console.log(this.state.rating)
   }
 
   render() {
@@ -44,7 +40,6 @@ class ProductReview extends Component {
  albumId, handleSubmit, userId, review, reviews
 } = this.props
     const userReview = reviews.filter(el => el.userId === userId)[0]
-    console.log('USER REVIEW', userReview)
     return (
       <div>
         {this.props.isLoggedIn ?
