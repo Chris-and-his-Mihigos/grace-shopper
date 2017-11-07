@@ -10,9 +10,6 @@ const GET_USER = 'GET_USER';
 const REMOVE_USER = 'REMOVE_USER';
 const SET_SESSION = 'SET_SESSION';
 
-const ADMIN_FETCH_USERS = 'ADMIN_FETCH_USERS';
-const ADMIN_DELETE_USER = 'ADMIN_DELETE_USER';
-const ADMIN_UPDATE_USER = 'ADMIN_UPDATE_USER';
 /**
  * INITIAL STATE
  */
@@ -24,10 +21,6 @@ const defaultUser = {};
 const getUser = user => ({ type: GET_USER, user });
 const removeUser = () => ({ type: REMOVE_USER });
 const setSess = id => ({ type: SET_SESSION, id });
-
-const fetchUsers = users => ({ type: ADMIN_FETCH_USERS, users });
-const deleteUser = id => ({ type: ADMIN_DELETE_USER, id });
-const updateUser = user => ({ type: ADMIN_UPDATE_USER, user });
 
 /**
  * REDUCER
@@ -107,30 +100,4 @@ export const logout = () => (dispatch) => {
       dispatch(addError(err.response.statusText))
       console.log(err)
     })
-};
-
-// ADMIN THUNKS
-
-export const adminFetchUsers = () => (dispatch) => {
-  axios.get('/api/admin/users')
-    .then(res => dispatch(fetchUsers(res.data)))
-    .catch(err => dispatch(addError(err.response.statusText)));
-};
-
-export const adminRemoveUser = id => (dispatch) => {
-  dispatch(deleteUser(id));
-  axios.delete(`/api/admin/users/${id}`)
-    .catch((err) => {
-      dispatch(addError(err.response.statusText));
-      console.error(`Removing user: ${id} unsuccesful`, err)
-    });
-};
-
-export const adminUpdateUser = (id, user) => (dispatch) => {
-  axios.put(`/api/admin/users/${id}`, user)
-    .then(res => dispatch(updateUser(res.data)))
-    .catch((err) => {
-      dispatch(addError(err.response.statusText))
-      console.error(`Updating user: ${user} unsuccesful`, err)
-    });
 };
