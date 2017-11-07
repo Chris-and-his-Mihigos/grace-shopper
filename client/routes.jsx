@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 import history from './history';
 import { Main, Login, Signup, UserHome, Home, AllAlbums, Cart, AboutUs, SingleAlbum } from './components';
 // import ProductListing from './components/productlisting'
-import { me, fetchOrders, fetchProducts } from './store';
+import { me, fetchOrders, fetchProducts, fetchReviews } from './store';
 
 /**
  * COMPONENT
