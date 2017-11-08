@@ -96,12 +96,12 @@ export const purchaseOrder = (id, shipping, order) => (dispatch) => {
     })
     .then(() => axios.put(`/api/orders/${id}/shipping`, shipping))
     .then(() => dispatch(clearCart()))
+    .then(() => axios.post('/api/email/purchase', { email: shipping.email, status: order.status }))
     .catch((err) => {
       dispatch(addError(err.response.statusText))
       console.error(`Updating order: ${shipping} unsuccesful`, err)
     });
 };
-
 
 // ADMIN THUNKS
 
@@ -110,6 +110,7 @@ export const adminUpdateOrder = (id, order) => (dispatch) => {
     .then((res) => {
       dispatch(adminUpdate(res.data))
     })
+    .then(() => axios.post('/api/email/update', { id: order.id, status: order.status }))
     .catch((err) => {
       dispatch(addError(err.response.statusText))
       console.error(`Updating order: ${order} unsuccesful`, err)

@@ -3,17 +3,16 @@ import { Card, Icon, Image, Button } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 import { addCart, addToCart } from '../store/cart';
 
-const AlbumCard = (props) => {
+const AdminAlbumCard = (props) => {
   const {
     product, cart, handleSubmit, cartId, user, session, isAdmin
   } = props;
-  let redirect;
-  if (isAdmin) {
-    redirect = `admin/album/${product.id}`;
-  } else { redirect = `/album/${product.id}` }
   return (
-    <Card>
-      <a href={redirect}>
+    <Card style={{ margin: 'inherit' }}>
+
+      <a href={`admin/album/${product.id}`}>
+
+
         <Image
           src={product.image}
           label={{
@@ -35,35 +34,22 @@ const AlbumCard = (props) => {
         </Card.Description>
       </Card.Content>
       <Card.Content extra>
-
-        {product.inventory <= 0 ?
-          <div>
-            <Button color="red" disabled>
-              <Icon name="dont" />
-              Sorry, this album is out of stock!
-        </Button>
-          </div>
-          :
-          <div>
-            {cart[0] &&
-              cart[0].items.filter(item => +item.product.id === product.id).length ?
-                <Button color="green" disabled>
-                  <Icon name="add to cart" />
-                  Already in Cart!
+        {cart[0] &&
+          cart[0].items.filter(item => +item.product.id === product.id).length ? (
+            <Button color="green" disabled>
+              <Icon name="add to cart" />
+              Already in Cart!
           </Button>
-               :
-                <Button
-                  onClick={(event) => {
-                    handleSubmit(event, product, cart, cartId, user, session);
-                  }}
-                >
-                  <Icon name="add to cart" />
-                  Add to Cart
+          ) : (
+            <Button
+              onClick={(event) => {
+                handleSubmit(event, product, cart, cartId, user, session);
+              }}
+            >
+              <Icon name="add to cart" />
+              Add to Cart
           </Button>
-              }
-          </div>
-
-        }
+          )}
       </Card.Content>
     </Card>
   );
@@ -97,4 +83,4 @@ const mapDispatch = dispatch => ({
   },
 });
 
-export default connect(mapState, mapDispatch)(AlbumCard);
+export default connect(mapState, mapDispatch)(AdminAlbumCard);

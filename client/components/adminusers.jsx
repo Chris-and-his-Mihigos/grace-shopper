@@ -15,10 +15,16 @@ class AdminUsers extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      status: '',
-    };
-    this.filterStatus = this.filterStatus.bind(this);
-  }
+        status: '',
+      };
+      this.filterStatus = this.filterStatus.bind(this);
+    }
+    filterStatus(user) {
+        // this is necessary as a user can be deleted and his reviews are orphaned
+        const statusMatch = new RegExp(this.state.status, 'i');
+
+        return statusMatch.test(user.isAdmin);
+      }
 
   componentDidMount() {
     this.props.loadUsers();
@@ -35,7 +41,6 @@ class AdminUsers extends React.Component {
     const {
       users, deleteUser, promoteUser, state, resetPassword,
     } = this.props;
-    console.log('PROPS', state);
     return (
       <div>
         <Title title="User Management" />

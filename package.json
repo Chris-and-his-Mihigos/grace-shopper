@@ -23,6 +23,7 @@
   "dependencies": {
     "axios": "^0.15.3",
     "body-parser": "^1.16.1",
+    "chai-enzyme": "^0.8.0",
     "chance": "^1.0.12",
     "compression": "^1.7.1",
     "connect-session-sequelize": "^4.1.0",
@@ -32,6 +33,7 @@
     "history": "^4.6.3",
     "moment": "^2.19.1",
     "morgan": "^1.8.1",
+    "nodemailer": "^4.3.1",
     "passport": "^0.3.2",
     "passport-facebook": "^2.1.1",
     "passport-google-oauth": "^1.0.0",
@@ -48,6 +50,8 @@
     "redux-thunk": "^2.2.0",
     "semantic-ui-react": "^0.75.1",
     "sequelize": "^4.3.1",
+    "sinon": "^4.1.2",
+    "sinon-chai": "^2.14.0",
     "socket.io": "^2.0.3"
   },
   "devDependencies": {
@@ -62,7 +66,7 @@
     "babel-register": "^6.24.1",
     "chai": "^3.5.0",
     "css-loader": "^0.26.1",
-    "enzyme": "^3.0.0",
+    "enzyme": "^3.1.1",
     "enzyme-adapter-react-16": "^1.0.0",
     "eslint": "^4.10.0",
     "eslint-config-airbnb": "^16.1.0",
