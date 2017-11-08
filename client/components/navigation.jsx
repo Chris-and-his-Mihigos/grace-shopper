@@ -55,7 +55,7 @@ const Navigation = (props) => {
               <Button inverted as={Link} to="/cart" style={{ marginLeft: '0.5em' }}><Icon name="cart" />Cart</Button>
 
               <Button inverted as={Link} to="/home" style={{ marginLeft: '0.5em' }}><Icon name="user circle outline" />Profile</Button>
-           
+
             </Menu.Item>
           :
             <Menu.Item position="right">
@@ -80,7 +80,6 @@ const mapState = state => ({
 
 const mapDispatch = dispatch => ({
   handleClick: () => {
-    console.log('You signed out!');
     dispatch(logout())
     // browserHistory.push('/');
   },

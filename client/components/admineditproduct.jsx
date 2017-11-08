@@ -9,11 +9,10 @@ import {
   Modal,
   Header,
   Icon,
-  Divider,
 } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 import history from '../history.js';
-import { addCart, updateCart, fetchReviews, removeReview, adminUpdateProduct, adminRemoveProduct, fetchProducts } from '../store';
+import { addCart, updateCart, fetchReviews, removeReview, updateProduct, removeProduct, fetchProducts } from '../store';
 import AdminAlbumCard from './adminalbumcard.jsx';
 import ProductReview from './productreview.jsx';
 
@@ -21,14 +20,13 @@ class AdminEditProduct extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      title: '',
-      description: '',
-      price: [],
-      photo: '',
+      flag: false,
     }
     this.handleClick = this.handleClick.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
     this.handleRemove = this.handleRemove.bind(this)
+    this.handleOpen = this.handleOpen.bind(this)
+    this.handleClose = this.handleClose.bind(this)
   }
   componentDidMount() {
     this.props.loadReviews(this.props.albumId)
@@ -37,16 +35,21 @@ class AdminEditProduct extends React.Component {
   handleClick(reviewId) {
     this.props.deleteReview(reviewId)
   }
+  handleOpen() {
+    this.setState({ flag: true })
+  }
+  handleClose() {
+    this.setState({ flag: false })
+  }
 
   handleRemove(e) {
     e.preventDefault()
     this.props.deleteAlbum(this.props.albumId)
-    console.log('deleting', this.props.albumId)
+    this.handleClose()
     history.push('/allalbums')
   }
 
   handleSubmit(evt, data) {
-    console.log('handling')
     evt.preventDefault();
     const albumUpdate = {
       releaseTitle: evt.target.title.value,
@@ -58,10 +61,10 @@ class AdminEditProduct extends React.Component {
     if (evt.target.photo.value !== '') {
       albumUpdate.photo = evt.target.photo.value
     }
-    console.log('UPDATE', albumUpdate)
-    console.log('ID', this.props.albumId)
     this.props.updateAlbum(this.props.albumId, albumUpdate)
-    history.push(`/admin/album/${albumId}`)
+    this.handleClose()
+    history.push('/')
+    history.push(`/admin/album/${this.props.albumId}`)
   }
 
   render() {
@@ -79,7 +82,7 @@ class AdminEditProduct extends React.Component {
           <br />
 
           {album &&
-            <Modal trigger={<Button>Edit Product</Button>} closeIcon>
+            <Modal open={this.state.flag} trigger={<Button onClick={this.handleOpen}>Edit Product</Button>} onClose={this.handleClose} closeIcon >
               <Header icon="edit" content="Edit this Product" />
               <Modal.Content>
                 <Segment inverted>
@@ -172,10 +175,10 @@ const mapDispatch = dispatch => ({
     dispatch(removeReview(reviewId))
   },
   updateAlbum: (albumId, albumUpdate) => {
-    dispatch(adminUpdateProduct(albumId, albumUpdate))
+    dispatch(updateProduct(albumId, albumUpdate))
   },
   deleteAlbum: (albumId) => {
-    dispatch(adminRemoveProduct(albumId))
+    dispatch(removeProduct(albumId))
     dispatch(fetchProducts())
   },
 });

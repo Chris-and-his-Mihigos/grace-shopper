@@ -35,22 +35,35 @@ const AlbumCard = (props) => {
         </Card.Description>
       </Card.Content>
       <Card.Content extra>
-        {cart[0] &&
-          cart[0].items.filter(item => +item.product.id === product.id).length ? (
-            <Button color="green" disabled>
-              <Icon name="add to cart" />
-              Already in Cart!
+
+        {product.inventory <= 0 ?
+          <div>
+            <Button color="red" disabled>
+              <Icon name="dont" />
+              Sorry, this album is out of stock!
+        </Button>
+          </div>
+          :
+          <div>
+            {cart[0] &&
+              cart[0].items.filter(item => +item.product.id === product.id).length ?
+                <Button color="green" disabled>
+                  <Icon name="add to cart" />
+                  Already in Cart!
           </Button>
-          ) : (
-            <Button
-              onClick={(event) => {
-                handleSubmit(event, product, cart, cartId, user, session);
-              }}
-            >
-              <Icon name="add to cart" />
-              Add to Cart
+               :
+                <Button
+                  onClick={(event) => {
+                    handleSubmit(event, product, cart, cartId, user, session);
+                  }}
+                >
+                  <Icon name="add to cart" />
+                  Add to Cart
           </Button>
-          )}
+              }
+          </div>
+
+        }
       </Card.Content>
     </Card>
   );

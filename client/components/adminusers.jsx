@@ -18,7 +18,7 @@ class AdminUsers extends React.Component {
     filterStatus(user) {
         // this is necessary as a user can be deleted and his reviews are orphaned
         const statusMatch = new RegExp(this.state.status, 'i');
-    
+
         return statusMatch.test(user.isAdmin);
       }
 
@@ -28,7 +28,6 @@ class AdminUsers extends React.Component {
 
   render() {
     const { users, deleteUser, promoteUser, state } = this.props;
-    console.log('PROPS', state)
     return (
       <div>
         <Title title="User Management" />
