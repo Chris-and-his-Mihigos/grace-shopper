@@ -98,7 +98,7 @@ const fakeUserGenerator = () => {
   const user = {
     email: emails.pop(),
     password: faker.internet.password(),
-    oldPassword: false
+    oldPassword: false,
   }
   fakeUsers.push(user);
 }
@@ -112,7 +112,7 @@ const fakeProductGenerator = () => {
     genre: fakeGenres[randomInt(0, 4)],
     releaseYear: randomInt(1920, 2017),
     image: fakeImage[randomInt(0, 14)],
-    songsInfo: [{ title: faker.fake('{{lorem.words}}'), duration: (`${randomInt(1, 9).toString()}:${randomInt(0, 9).toString() }${randomInt(0, 9).toString()}`) }],
+    songsInfo: [{ title: faker.fake('{{lorem.words}}'), duration: (`${randomInt(1, 9).toString()}:${randomInt(0, 9).toString()}${randomInt(0, 9).toString()}`) }],
     label: fakeLabels[randomInt(0, 4)],
     inventory: randomInt(0, 100),
     price: randomInt(1, 50),
@@ -166,13 +166,40 @@ const seed = () =>
     User.create(user)))
     .then(() =>
       Promise.all(fakeProducts.map(product =>
-        Product.create(product)) ))
+        Product.create(product))))
     .then(() =>
       Promise.all(fakeReviews.map(review =>
-        Review.create(review)) ))
+        Review.create(review))))
     .then(() =>
       Promise.all(fakeOrders.map(order =>
-        Order.create(order)) ));
+        Order.create(order))))
+    .then(
+      () =>
+        User.create({
+          email: 'christiansadi@gmail.com',
+          password: '123',
+          oldPassword: false,
+          isAdmin: true,
+        }),
+      User.create({
+        email: 'mtamahori@gmail.com',
+        password: '123',
+        oldPassword: false,
+        isAdmin: true,
+      }),
+      User.create({
+        email: 'patrick.gund@gmail.com',
+        password: '123',
+        oldPassword: false,
+        isAdmin: true,
+      }),
+      User.create({
+        email: 'mihigo@u.northwestern.edu',
+        password: '123',
+        oldPassword: false,
+        isAdmin: true,
+      }),
+    )
 
 const db = require('../server/db');
 
