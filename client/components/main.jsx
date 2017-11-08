@@ -6,7 +6,7 @@ import { logout } from '../store'
 import Navigation from './navigation.jsx'
 import Footer from './footer.jsx'
 import ErrorModal from './error.jsx';
-
+import PasswordReset from './passwordreset.jsx'
 /**
  * COMPONENT
  *  The Main component is our 'picture frame' - it displays the navbar and anything
@@ -14,12 +14,13 @@ import ErrorModal from './error.jsx';
  *  rendered out by the component's `children`.
  */
 const Main = (props) => {
-  const { children, error } = props
+  const { children, error, user } = props
 
   return (
     <div>
       <Navigation />
       {error !== null ? <ErrorModal error={error} /> : <div />}
+      {user.oldPassword ? <PasswordReset /> : <div /> }
       {children}
       <Footer />
     </div>
@@ -32,6 +33,7 @@ const Main = (props) => {
 const mapState = state => ({
   isLoggedIn: !!state.user.id,
   error: state.error,
+  user: state.user,
 })
 
 const mapDispatch = dispatch => ({

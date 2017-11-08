@@ -12,21 +12,25 @@ const User = db.define('user', {
     },
   },
   password: {
-    type: Sequelize.STRING
+    type: Sequelize.STRING,
+  },
+  oldPassword: {
+    type: Sequelize.BOOLEAN,
+    defaultValue: false,
   },
   isAdmin: {
     type: Sequelize.BOOLEAN,
     defaultValue: false,
   },
   salt: {
-    type: Sequelize.STRING
+    type: Sequelize.STRING,
   },
   googleId: {
-    type: Sequelize.STRING
+    type: Sequelize.STRING,
   },
   facebookId: {
-    type: Sequelize.STRING
-  }
+    type: Sequelize.STRING,
+  },
 
 })
 
@@ -61,6 +65,7 @@ const setSaltAndPassword = user => {
   if (user.changed('password')) {
     user.salt = User.generateSalt()
     user.password = User.encryptPassword(user.password, user.salt)
+    user.oldPassword = false
   }
 }
 

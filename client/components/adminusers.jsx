@@ -3,7 +3,11 @@ import moment from 'moment';
 import { connect } from 'react-redux';
 import { List, Modal, Header, Select, Button } from 'semantic-ui-react';
 import Title from './title.jsx';
-import { adminFetchUsers, adminRemoveUser, adminUpdateUser } from '../store/users'
+import {
+  adminFetchUsers,
+  adminRemoveUser,
+  adminUpdateUser,
+} from '../store/users';
 /**
  * COMPONENT
  */
@@ -23,19 +27,26 @@ class AdminUsers extends React.Component {
       }
 
   componentDidMount() {
-    this.props.loadUsers()
+    this.props.loadUsers();
+  }
+
+  filterStatus(user) {
+    // this is necessary as a user can be deleted and his reviews are orphaned
+    const statusMatch = new RegExp(this.state.status, 'i');
+
+    return statusMatch.test(user.isAdmin);
   }
 
   render() {
-    const { users, deleteUser, promoteUser, state } = this.props;
+    const {
+      users, deleteUser, promoteUser, state, resetPassword,
+    } = this.props;
     return (
       <div>
         <Title title="User Management" />
         {!users ? (
           // if there are no users, render this:
-          <h1>
-            There are no users to display.
-          </h1>
+          <h1>There are no users to display.</h1>
         ) : (
           // if there are users, render this:
           <div>
@@ -61,7 +72,7 @@ class AdminUsers extends React.Component {
 
               users &&
                 users
-                .filter(this.filterStatus)
+                  .filter(this.filterStatus)
                   .sort((a, b) => a.id - b.id)
                   .map(user => (
                     <Modal
@@ -77,24 +88,6 @@ class AdminUsers extends React.Component {
                             <List.Header as="a">{`User #${user.email}`}</List.Header>
                             <List.Description as="a">
                               {`Last Updated ${moment(
-                                  user.updatedAt
-                                    .split('T')
-                                    .join(' ')
-                                    .slice(0, 19),
-                                  'YYYY-MM-DD HH-mm-ss',
-                                )
-                                  .subtract(6, 'hours')
-                                  .fromNow()}`}
-                            </List.Description>
-                          </List.Content>
-                        </List.Item>
-                        }
-                    >
-                      <Modal.Header>{`Email: ${user.email}`}</Modal.Header>
-                      <Modal.Content>
-                        <Modal.Description>
-                          <Header>
-                            {`Last Updated on ${moment(
                                 user.updatedAt
                                   .split('T')
                                   .join(' ')
@@ -102,7 +95,25 @@ class AdminUsers extends React.Component {
                                 'YYYY-MM-DD HH-mm-ss',
                               )
                                 .subtract(6, 'hours')
-                                .format('MMMM Do YYYY, h:mm:ss a')}`}
+                                .fromNow()}`}
+                            </List.Description>
+                          </List.Content>
+                        </List.Item>
+                      }
+                    >
+                      <Modal.Header>{`Email: ${user.email}`}</Modal.Header>
+                      <Modal.Content>
+                        <Modal.Description>
+                          <Header>
+                            {`Last Updated on ${moment(
+                              user.updatedAt
+                                .split('T')
+                                .join(' ')
+                                .slice(0, 19),
+                              'YYYY-MM-DD HH-mm-ss',
+                            )
+                              .subtract(6, 'hours')
+                              .format('MMMM Do YYYY, h:mm:ss a')}`}
                           </Header>
                           <Header>
                             {`User Created on ${moment(
@@ -115,12 +126,30 @@ class AdminUsers extends React.Component {
                               .subtract(6, 'hours')
                               .format('MMMM Do YYYY, h:mm:ss a')}`}
                           </Header>
-                         {!user.isAdmin && <Button onClick={(evt)=>promoteUser(evt,user.id,user)}>Promote User</Button>}
-                         <Button onClick={(evt)=>deleteUser(evt,user.id)}>Delete User</Button>
+                          {!user.isAdmin && (
+                            <div>
+                              <Button
+                                onClick={evt => promoteUser(evt, user.id, user)}
+                              >
+                                Promote User
+                              </Button>
+                              <Button onClick={evt => deleteUser(evt, user.id)}>
+                                Delete User
+                              </Button>
+                              {!user.oldPassword ? <Button
+                                onClick={evt => resetPassword(evt, user.id)}
+                              >
+                                Reset Password
+                              </Button>: <Button disabled
+                            >
+                              Password has been reset!
+                            </Button>}
+                            </div>
+                          )}
                         </Modal.Description>
                       </Modal.Content>
                     </Modal>
-                    ))}
+                  ))}
             </List>
           </div>
         )}
@@ -142,20 +171,26 @@ const mapState = (state) => {
 
 const mapDispatch = dispatch => ({
   loadUsers() {
-    dispatch(adminFetchUsers())
+    dispatch(adminFetchUsers());
   },
   deleteUser(evt, userId) {
     evt.preventDefault();
-    dispatch(adminRemoveUser(userId))
+    dispatch(adminRemoveUser(userId));
   },
   promoteUser(evt, userId, user) {
     evt.preventDefault();
     const newAdmin = Object.assign({}, user, {
       isAdmin: true,
-    })
-    dispatch(adminUpdateUser(userId, newAdmin))
+    });
+    dispatch(adminUpdateUser(userId, newAdmin));
   },
-})
-
+  resetPassword(evt, userId, user) {
+    evt.preventDefault();
+    const updatedUser = Object.assign({}, user, {
+      oldPassword: true,
+    });
+    dispatch(adminUpdateUser(userId, updatedUser));
+  },
+});
 
 export default connect(mapState, mapDispatch)(AdminUsers);

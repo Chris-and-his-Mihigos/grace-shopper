@@ -98,6 +98,7 @@ const fakeUserGenerator = () => {
   const user = {
     email: emails.pop(),
     password: faker.internet.password(),
+    oldPassword: false
   }
   fakeUsers.push(user);
 }
@@ -149,7 +150,7 @@ const createFakes = () => {
   for (let i = 0; i < 40; i++) {
     fakeProductGenerator();
   }
-  for (let i = 0; i < 200; i++) {
+  for (let i = 0; i < 0; i++) {
     fakeOrderGenerator();
   }
 }
