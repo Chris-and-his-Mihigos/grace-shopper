@@ -19,4 +19,5 @@ export { default as SingleAlbum } from './singlealbum.jsx'
 export { default as ErrorModal } from './error.jsx';
 export { default as AdminOrders } from './adminorders.jsx';
 export { default as AdminUsers } from './adminusers.jsx';
-export { default as AdminProducts } from './adminproducts.jsx';
+export { default as AdminAddProduct } from './adminaddproduct.jsx';
+export { default as AdminEditProduct } from './admineditproduct.jsx';

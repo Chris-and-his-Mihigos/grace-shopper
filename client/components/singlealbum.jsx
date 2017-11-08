@@ -22,9 +22,6 @@ class SingleAlbum extends React.Component {
 
   handleClick(reviewId) {
     this.props.deleteReview(reviewId)
-    // console.log('evemt', event)
-    // console.log('data', data)
-    console.log('review id', reviewId)
   }
   render() {
     const { album, cart, handleSubmit, cartId, reviews } = this.props;

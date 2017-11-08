@@ -16,6 +16,7 @@ import {
   SingleAlbum,
   AdminOrders,
   AdminUsers,
+  AdminAddProduct,
 } from './components';
 import AdminEditProduct from './components/admineditproduct.jsx'
 // import ProductListing from './components/productlisting'
@@ -54,6 +55,7 @@ class Routes extends Component {
                 <Switch><Route path="/admin/users" component={AdminUsers} />
                   <Route path="/admin/album/:id" component={AdminEditProduct} />
                   <Route path="/admin/orders" component={AdminOrders} />
+                  <Route path="/admin/products" component={AdminAddProduct} />
                 </Switch>
               )}
               </Switch>
