@@ -59,7 +59,7 @@ const Footer = () => (
                     <h3>After an order has shipped:</h3>
 
                     <p>
-                      Maximal Records does not offer returns or reimbursement
+                      Persistent Records does not offer returns or reimbursement
                       after an order has been shipped.
                     </p>
                     <h3>Before an order has shipped:</h3>

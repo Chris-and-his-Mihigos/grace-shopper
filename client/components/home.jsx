@@ -25,7 +25,7 @@ const Home = () => (
           <div id="videoMessage">
             <Header
               as="h1"
-              content="Maximal Records"
+              content="Persistent Records"
               inverted
               className="textoverlay"
               style={{

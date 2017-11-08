@@ -63,7 +63,16 @@ export const adminUpdateUser = (id, user) => (dispatch) => {
   axios.put(`/api/admin/users/${id}`, user)
     .then(res => dispatch(updateUser(res.data)))
     .catch((err) => {
-      dispatch(addError(err.response.statusText))
+      // dispatch(addError(err.response.statusText))
+      console.error(`Updating user: ${user} unsuccesful`, err)
+    });
+};
+
+export const userUpdateUser = (id, user) => (dispatch) => {
+  axios.put(`/api/users/${id}`, user)
+    .then(res => dispatch(updateUser(res.data)))
+    .catch((err) => {
+      // dispatch(addError(err.response.statusText))
       console.error(`Updating user: ${user} unsuccesful`, err)
     });
 };

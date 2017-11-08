@@ -13,7 +13,7 @@ const AboutUs = () => (
               Who We Are
             </Header>
             <p style={{ fontSize: '1.33em' }}>
-              Since 1990, Maximal Records has welcomed independent music lovers
+              Since 1990, Persistent Records has welcomed independent music lovers
               of all kinds to our unique, vibrant stores in Berkeley, San
               Francisco and Hollywood. We stock every kind of music and movies
               -- from the top 40 to the best in underground rock and hip-hop,
@@ -37,12 +37,12 @@ const AboutUs = () => (
               and to make everyone feel at home.
               <br />
               <br />
-              Maximal Records began at a time when the huge chain stores were
+              Persistent Records began at a time when the huge chain stores were
               mercilessly swallowing up independent stores and local chain
               stores, depriving communities across the country of a personal
               relationship with their music outlets, and destroying the
               opportunity to discover a whole world of music beyond what
-              corporate retailers wanted them to see. Maximal Records arose out of that
+              corporate retailers wanted them to see. Persistent Records arose out of that
               community of music lovers that wanted a better place for music
               than a corporate chain store -- one with the widest possible
               selection, better service, and more respect for people's ideas and

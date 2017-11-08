@@ -14,6 +14,13 @@ router.get('/', (req, res, next) => {
     .catch(next)
 });
 
+router.put('/:userId', (req, res, next) => {
+  User.findById(req.params.userId)
+    .then(user => user.update(req.body))
+    .then(user => res.status(201).send(user))
+    .catch(next);
+});
+
 router.post('/', (req, res, next) => {
   User.create(req.body)
     .then(user => res.status(201).json(user))
