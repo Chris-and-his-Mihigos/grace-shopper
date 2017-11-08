@@ -33,6 +33,7 @@
     "history": "^4.6.3",
     "moment": "^2.19.1",
     "morgan": "^1.8.1",
+    "nodemailer": "^4.3.1",
     "passport": "^0.3.2",
     "passport-facebook": "^2.1.1",
     "passport-google-oauth": "^1.0.0",
